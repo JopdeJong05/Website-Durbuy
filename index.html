@@ -46,6 +46,7 @@
         
         <!--responsive.css-->
         <link rel="stylesheet" href="assets/css/responsive.css">
+		
 
 		
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -111,12 +112,27 @@
 						"Beleef natuur en rust,<br>		
 						 jouw chalet midden in de bossen van Durbuy"
 					</p>
-					<button class="welcome-btn" onclick="window.location.href='https://www.airbnb.be/rooms/1279575623317574123?viralityEntryPoint=1&unique_share_id=C800AAE9-CBF4-4143-AC56-5796DBD5798F&slcid=99faf95d527d42e48a0a8fd1da16371c&s=76&feature=share&adults=1&channel=native&locale=nl&slug=KNQjk4ir&source_impression_id=p3_1730905428_P32tt9uoloBURi89'">Bekijk Beschikbaarheid</button>
+					<button class="welcome-btn" onclick="scrollToSection()">Bekijk Beschikbaarheid</button>
+
+					<script>
+					  function scrollToSection() {
+						const section = document.getElementById('agenda');
+						if (section) {
+						  const sectionPosition = section.getBoundingClientRect().top + window.scrollY;
+						  const offset = window.innerHeight / 2 - section.offsetHeight / 2;
+						  window.scrollTo({
+							top: sectionPosition - offset,
+							behavior: 'smooth'
+						  });
+						}
+					  }
+					</script>
+					
+					
 				</div>
 			</div>
 
 			
-
 		</section><!--/.welcome-hero-->
 		<!--welcome-hero end -->
 		<!--accomodatie foto-->
@@ -125,7 +141,7 @@
 
 
 		<!--Park -->
-			<div class="container">
+			<section id="park" div class="container">
 				<div class="section-header">
 				<h2>Sunclass Durbuy</h2>
 				</div><!--/.section-header-->
@@ -242,26 +258,52 @@
 		</div>
 
 		  
-  <!-- omgeving end -->
-  <div class="container">
- 	<iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Europe%2FBrussels&showPrint=0&showTitle=0&showCalendars=0&showTz=0&src=Ym9zemljaHRkdXJidXlAZ21haWwuY29t&color=%23039BE5" 
-	style="border-width:0" width="100%" height="300" frameborder="0" scrolling="no"></iframe> 
-  </div>
+		<!-- omgeving end -->
 
-		<!--kaart start -->
+		<!-- AGENDA Begin -->
+	<section id= "agenda">
+		<style >
+			.container iframe {
+			border: none; /* Verwijder standaardrand */
+			box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Schaduweffect */
+			border-radius: 10px; /* Afgeronde hoeken */
+			transition: box-shadow 0.3s ease-in-out; /* Zachte animatie bij hover */
+			margin-top: 5%;
+			}
+		
+			.container iframe:hover {
+			box-shadow: 0 16px 25px rgba(0, 0, 0, 0.4); /* Iets sterkere schaduw bij hover */
+			}
+		</style>
+		
+		<div class="container">
+			<iframe 
+			src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FBrussels&showPrint=0&showTitle=0&showCalendars=0&showTz=0&src=Ym9zemljaHRkdXJidXlAZ21haWwuY29t&color=%23039BE5" 
+			style="border-width:0px; width:100%; height:300px;" 
+			frameborder="0" 
+			scrolling="no">
+			</iframe>
+
+			<button class="welcome-btn" onclick="window.location.href='mailto:boszichtdurbuy@gmail.com?subject=Reservatie%20aanvraag%20-%20Boszicht%20(website)&body=Beste%20team,%0A%0AIk%20wil%20graag%20een%20reservering%20maken.%20Kun%20je%20mij%20meer%20informatie%20geven?%0A%0AVriendelijke%20groeten'">
+			Reserveer
+			</button>
+			  
+			  
+		</div>
+	</section>
+  		<!-- AGENDA Einde -->
+
+
+		<!--KAART start -->
 		<section id="kaart"  class="brand">
 			<div class="container">
 				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2141.020859179986!2d5.4228686788710245!3d50.34571864538735!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c04fe9391621f9%3A0xac7adc1264d1c8a3!2sBoszicht%20Durbuy!5e0!3m2!1snl!2sbe!4v1730887248650!5m2!1snl!2sbe"
 				 width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
 			</div><!--/.container-->
+		<!--KAART Einde -->
 
-		</section><!--/brand-->	
-		<!--brand end -->
-
-		<!--blog start -->
-		<section id="blog" class="blog"></section><!--/.blog-->
-		<!--blog end -->
+	
 		
 
 		<!--contact start-->
