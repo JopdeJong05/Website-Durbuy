@@ -23,11 +23,6 @@
   border-radius: 10px;
 }
 
-#carousel div.selected img:hover {
-  transform: scale(1.2); /* Make only the front image grow larger on hover */
-}
-
-  
 #carousel div.hideLeft {
   left: 0%;
   opacity: 0;
@@ -158,6 +153,7 @@
 }
 
 @media (min-width: 768px) {
+  
   .button-82-front {
     font-size: 1.25rem;
     padding: 12px 42px;
@@ -197,4 +193,35 @@
 
 .button-82-pushable:focus:not(:focus-visible) {
   outline: none;
+}
+
+@media (max-width: 768px) {
+  #carousel div img {
+    width: 100%; /* Make images scale to the screen size */
+    max-width: 300px; /* Limit maximum size on smaller screens */
+  }
+
+  .buttons {
+    bottom: -50px; /* Adjust button position for smaller screens */
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1200px) {
+  #carousel div img {
+    width: 350px;
+  }
+
+  .buttons {
+    bottom: -80px;
+  }
+}
+
+@media (min-width: 1201px) {
+  #carousel div img {
+    width: 400px;
+  }
+
+  .buttons {
+    bottom: -100px;
+  }
 }
