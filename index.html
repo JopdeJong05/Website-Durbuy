@@ -54,40 +54,51 @@
 		<!-- Lightbox2 CSS -->
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
 		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 		<style>
 			
-			.carousel-wrapper {
-			  max-width: 1000px;
-			  margin: 0 auto;
-			  position: relative;
-			}
-		
-			.owl-carousel .item {
-			  padding: 0 10px;
-			}
-		
-			.inner {
-			  transition: transform 0.4s ease, box-shadow 0.4s ease;
-			}
-		
-			.inner img {
-			  width: 100%;
-			  height: auto;
-			  border-radius: 12px;
-			  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-			  display: block;
-			}
-		
-		
-			.owl-carousel .center .inner img {
-			  box-shadow: 0 10px 25px rgba(0,0,0,0.35);
-			}
-		
-			.owl-nav {
-			  display: none !important;
-			}
-		  </style>
+
+    .carousel-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 10px;
+    }
+
+    .owl-carousel .item {
+      padding: 0 5px;
+    }
+
+    .inner {
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .inner img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      display: block;
+    }
+
+
+    .owl-carousel .center .inner img {
+      box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+    }
+
+    /* Verberg knoppen */
+    .owl-nav {
+      display: none !important;
+    }
+
+    /* Iets grotere afbeelding op mobiel */
+    @media (max-width: 599px) {
+      .inner img {
+        max-width: 90vw;
+        margin: 0 auto;
+      }
+    }
+  </style>
        
 
     </head>
@@ -219,18 +230,31 @@
 			<script>
 				$(document).ready(function(){
 				  $(".owl-carousel").owlCarousel({
-					items: 3,
 					loop: true,
 					center: true,
 					margin: 10,
 					nav: false,
 					dots: false,
 					autoplay: true,
-					autoplayTimeout: 2500,
-					autoplayHoverPause: true
-			  });
-			});
-		  </script>
+					autoplayTimeout: 4000,
+					autoplayHoverPause: true,
+					responsive: {
+					  0: {
+						items: 1,
+						center: false
+					  },
+					  600: {
+						items: 2,
+						center: true
+					  },
+					  1000: {
+						items: 4,
+						center: true
+					  }
+					}
+				  });
+				});
+			  </script>
 		
 		<!--accomodatie foto end-->
 
