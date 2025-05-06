@@ -46,30 +46,54 @@
         
         <!--responsive.css-->
         <link rel="stylesheet" href="assets/css/responsive.css">
+		
+		
+		<link rel="stylesheet" href="OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css">
+  		<link rel="stylesheet" href="OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css">
 
-		<link rel="stylesheet" href="/assets/css/carousel.css">
+		<!-- Lightbox2 CSS -->
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
 		
 
-
-
-
-
+		<style>
+			
+			.carousel-wrapper {
+			  max-width: 1000px;
+			  margin: 0 auto;
+			  position: relative;
+			}
 		
-        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+			.owl-carousel .item {
+			  padding: 0 10px;
+			}
 		
-        <!--[if lt IE 9]>
-			<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
+			.inner {
+			  transition: transform 0.4s ease, box-shadow 0.4s ease;
+			}
+		
+			.inner img {
+			  width: 100%;
+			  height: auto;
+			  border-radius: 12px;
+			  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+			  display: block;
+			}
+		
+		
+			.owl-carousel .center .inner img {
+			  box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+			}
+		
+			.owl-nav {
+			  display: none !important;
+			}
+		  </style>
+       
 
     </head>
-	
+
 	<body>
-		<!--[if lte IE 9]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-        <![endif]-->
-	
+		
 		<!--welcome-hero start -->
 		<section id="home" class="welcome-hero">
 
@@ -141,52 +165,72 @@
 			
 		</section><!--/.welcome-hero-->
 		<!--welcome-hero end -->
-		<!--accomodatie foto-->
+		<!--accomodatie foto begin-->
 		
-			<div id="carousel" class="carousel">
-		
-			   <div id='iten_1' class="hideLeft">
-				<img src="/assets/images/selectie/1.jpg">
+		<div style="height: 100px;"></div>
+
+		<div class="carousel-wrapper">
+			<div class="owl-carousel owl-theme">
+			  <div class="item">
+				<div class="inner">
+				  <a href="/assets/images/selectie/1.jpg" data-lightbox="galerij">
+					<img src="/assets/images/selectie/1.jpg" alt="Foto 1">
+				  </a>
+				</div>
 			  </div>
-		
-			  <div id='item_2' class="prevLeftSecond">
-				<img src="/assets/images/selectie/2.jpg">
+			  <div class="item">
+				<div class="inner">
+				  <a href="/assets/images/selectie/2.jpg" data-lightbox="galerij">
+					<img src="/assets/images/selectie/2.jpg" alt="Foto 2">
+				  </a>
+				</div>
 			  </div>
-		
-			  <div id='item_3' class="prev">
-				<img src="/assets/images/selectie/3.jpg">
+			  <div class="item">
+				<div class="inner">
+				  <a href="/assets/images/selectie/3.jpg" data-lightbox="galerij">
+					<img src="/assets/images/selectie/3.jpg" alt="Foto 3">
+				  </a>
+				</div>
 			  </div>
-		
-			  <div id='item_4' class="selected">
-				<img src="/assets/images/selectie/4.jpg">
+			  <div class="item">
+				<div class="inner">
+				  <a href="/assets/images/selectie/4.jpg" data-lightbox="galerij">
+					<img src="/assets/images/selectie/4.jpg" alt="Foto 4">
+				  </a>
+				</div>
 			  </div>
-		
-			  <div id='item_5' class="next">
-				<img src="/assets/images/selectie/5.jpg">
+			  <div class="item">
+				<div class="inner">
+				  <a href="/assets/images/selectie/5.jpg" data-lightbox="galerij">
+					<img src="/assets/images/selectie/5.jpg" alt="Foto 5">
+				  </a>
+				</div>
 			  </div>
-		
-			  <div id='item_6' class="nextRightSecond">
-				<img src="/assets/images/selectie/7.jpg">
-			  </div>
-		
-			  <div id='item_7' class="hideRight">
-				<img src="/assets/images/selectie/8.jpg">
-			  </div>
-		
-			  <div id='item_8' class="hideRight">
-				<img src="/assets/images/selectie/9.jpg">
-			  </div>
-		
 			</div>
+		  </div>
 		
-			<div class="buttons">
-				<button class="button-82-pushable" role="button" id="prev"><span class="button-82-shadow"></span><span class="button-82-edge"></span><span class="button-82-front text">Previous</span></button>
-		
-		
-				<button class="button-82-pushable" role="button" id="next"><span class="button-82-shadow"></span><span class="button-82-edge"></span><span class="button-82-front text">Next</span></button>
-			</div>
-		  <!-- script -->
-		<script type="text/javascript" src="/assets/js/script.js"></script>
+		   <!-- Scripts -->
+			<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+			<script src="OwlCarousel2-2.3.4/dist/owl.carousel.min.js"></script>
+
+			<!-- Lightbox2 JS -->
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+
+			<script>
+				$(document).ready(function(){
+				  $(".owl-carousel").owlCarousel({
+					items: 3,
+					loop: true,
+					center: true,
+					margin: 10,
+					nav: false,
+					dots: false,
+					autoplay: true,
+					autoplayTimeout: 2500,
+					autoplayHoverPause: true
+			  });
+			});
+		  </script>
 		
 		<!--accomodatie foto end-->
 
@@ -274,42 +318,7 @@
 		</section><!--/.new-cars-->
 		<!--Park end -->
 
-		<!-- omgeving start -->
-		<div id="omgeving" class="owl-carousel owl-theme">
-			<div class="item">
-			
-				<div class="single-service-item">
-				<div class="single-service-icon">
-				  <img src="assets/images/wandel fiets.jpg" alt="img">
-				</div>
-				<h2><a href="#">Adventure Valley Durbuy</a></h2>
-				<p>Adventure Valley Durbuy is een avonturenpark met een breed scala aan activiteiten voor alle leeftijden. Je kunt er ziplinen, kajakken, mountainbiken, boogschieten, en zelfs deelnemen aan een uitdagende parcours door de bomen. Het park biedt ook indoor activiteiten zoals klimmuren en laser games.</p>
-			  </div>
-			</div>
-			<div class="item">
-			  <div class="single-service-item">
-				<div class="single-service-icon">
-				  <img src="/Website/assets/images/wandel fiets.jpg" alt="img">
-				</div>
-				<h2><a href="#">Kajakken op de Ourthe</a></h2>
-				<p>De rivier de Ourthe biedt uitstekende mogelijkheden voor kajakken. Verschillende verhuurbedrijven in Durbuy bieden kajaks aan voor tochten van verschillende lengtes. Dit is een geweldige manier om de natuurlijke schoonheid van de Ardennen te verkennen, met rustige stukken water afgewisseld met spannende stroomversnellingen.</p>
-			  </div>
-			</div>
-			<div class="item">
-			  <div class="single-service-item">
-				<div class="single-service-icon">
-				  <img src="/Website/assets/images/wandel fiets.jpg" alt="img">
-				</div>
-				<h2><a href="#">Wandelen en Fietsen</a></h2>
-				<p>Durbuy en de omgeving zijn perfect voor wandel- en fietsliefhebbers. Er zijn talloze goed gemarkeerde paden die door bossen, velden en langs de rivier de Ourthe lopen. Of je nu kiest voor een rustige wandeling of een uitdagende mountainbiketocht, de natuur van de Ardennen zal je zeker niet teleurstellen.</p>
-			  </div>
-			</div>
-			<!-- Voeg hier meer items toe indien nodig -->
-		  </div>
-		</div>
-
-		  
-		<!-- omgeving end -->
+		
 
 		<!-- AGENDA Begin -->
 	<section id= "agenda">
@@ -355,8 +364,6 @@
 		<!--KAART Einde -->
 
 	
-		
-
 		<!--contact start-->
 		<footer id="contact"  class="contact">
 			<div class="container">
