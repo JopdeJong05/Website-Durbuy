@@ -58,7 +58,6 @@
 
 		<style>
 			
-
     .carousel-wrapper {
       max-width: 1200px;
       margin: 0 auto;
@@ -75,7 +74,7 @@
 
     .inner img {
       width: 100%;
-      height: auto;
+      height: 100%;
       border-radius: 12px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.15);
       display: block;
@@ -86,11 +85,38 @@
       box-shadow: 0 10px 25px rgba(0,0,0,0.35);
     }
 
-    /* Verberg knoppen */
-    .owl-nav {
-      display: none !important;
-    }
+	.owl-nav {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 20px; 
+}
 
+.owl-nav button.owl-prev,
+.owl-nav button.owl-next {
+  background: #333;
+  color: white;
+  border: none;
+  padding: 12px 16px;
+  font-size: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.owl-nav button span {
+  display: none;
+}
+
+.owl-nav button.owl-prev::after {
+  content: "←";
+}
+
+.owl-nav button.owl-next::after {
+  content: "→";
+}
+
+
+	
     /* Iets grotere afbeelding op mobiel */
     @media (max-width: 599px) {
       .inner img {
@@ -174,13 +200,15 @@
 			</div>
 
 			
-		</section><!--/.welcome-hero-->
-		<!--welcome-hero end -->
+		</section>
 		<!--accomodatie foto begin-->
-		
-		<div style="height: 100px;"></div>
+		<div class="section-header">
+			<h2>De Accommodatie</h2>
+			</div><!--/.section-header-->
+		<div style="height: 80px;"></div>
 
-		<div class="carousel-wrapper">
+		<section id="accommodatie">
+		 <div class="carousel-wrapper">
 			<div class="owl-carousel owl-theme">
 			  <div class="item">
 				<div class="inner">
@@ -189,6 +217,7 @@
 				  </a>
 				</div>
 			  </div>
+
 			  <div class="item">
 				<div class="inner">
 				  <a href="/assets/images/selectie/2.jpg" data-lightbox="galerij">
@@ -196,6 +225,7 @@
 				  </a>
 				</div>
 			  </div>
+
 			  <div class="item">
 				<div class="inner">
 				  <a href="/assets/images/selectie/3.jpg" data-lightbox="galerij">
@@ -203,6 +233,7 @@
 				  </a>
 				</div>
 			  </div>
+
 			  <div class="item">
 				<div class="inner">
 				  <a href="/assets/images/selectie/4.jpg" data-lightbox="galerij">
@@ -210,6 +241,7 @@
 				  </a>
 				</div>
 			  </div>
+
 			  <div class="item">
 				<div class="inner">
 				  <a href="/assets/images/selectie/5.jpg" data-lightbox="galerij">
@@ -217,6 +249,55 @@
 				  </a>
 				</div>
 			  </div>
+
+			  <div class="item">
+				<div class="inner">
+				  <a href="/assets/images/selectie/7.jpg" data-lightbox="galerij">
+					<img src="/assets/images/selectie/7.jpg" alt="Foto 5">
+				  </a>
+				</div>
+			  </div>
+
+			  <div class="item">
+				<div class="inner">
+				  <a href="/assets/images/selectie/8.jpg" data-lightbox="galerij">
+					<img src="/assets/images/selectie/8.jpg" alt="Foto 5">
+				  </a>
+				</div>
+			  </div>
+
+			  <div class="item">
+				<div class="inner">
+				  <a href="/assets/images/selectie/9.jpg" data-lightbox="galerij">
+					<img src="/assets/images/selectie/9.jpg" alt="Foto 5">
+				  </a>
+				</div>
+			  </div>
+
+			  <div class="item">
+				<div class="inner">
+				  <a href="/assets/images/selectie/10.jpg" data-lightbox="galerij">
+					<img src="/assets/images/selectie/10.jpg" alt="Foto 5">
+				  </a>
+				</div>
+			  </div>
+
+			  <div class="item">
+				<div class="inner">
+				  <a href="/assets/images/selectie/11.jpg" data-lightbox="galerij">
+					<img src="/assets/images/selectie/11.jpg" alt="Foto 5">
+				  </a>
+				</div>
+			  </div>
+
+			  <div class="item">
+				<div class="inner">
+				  <a href="/assets/images/selectie/12.jpg" data-lightbox="galerij">
+					<img src="/assets/images/selectie/12.jpg" alt="Foto 5">
+				  </a>
+				</div>
+			  </div>
+
 			</div>
 		  </div>
 		
@@ -233,7 +314,7 @@
 					loop: true,
 					center: true,
 					margin: 10,
-					nav: false,
+					nav: true,
 					dots: false,
 					autoplay: true,
 					autoplayTimeout: 4000,
@@ -255,6 +336,7 @@
 				  });
 				});
 			  </script>
+		</section>
 		
 		<!--accomodatie foto end-->
 
@@ -360,7 +442,7 @@
 			}
 		</style>
 		
-		<div class="container">
+		<div class="container" style="margin-bottom: 10%;">
 			<iframe 
 			src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FBrussels&showPrint=0&showTitle=0&showCalendars=0&showTz=0&src=Ym9zemljaHRkdXJidXlAZ21haWwuY29t&color=%23039BE5" 
 			style="border-width:0px; width:100%; height:300px;" 
@@ -369,23 +451,13 @@
 			</iframe>
 
 			<button class="welcome-btn" onclick="window.location.href='mailto:boszichtdurbuy@gmail.com?subject=Boekingsaanvraag%20-%20Boszicht&body=Ik%20wil%20graag%20een%20boeking%20aanvragen%20voor%20volgende%20periode:%0A%0AAankomstdatum:%0AVertrekdatum:%0A%0AExtra%20vragen?%20Stel%20ze%20hieronder:'">
-			Reserveer
+			Reserveer hier
 			</button>
 			  
 			  
 		</div>
 	</section>
   		<!-- AGENDA Einde -->
-
-
-		<!--KAART start -->
-		<section id="kaart"  class="brand">
-			<div class="container">
-				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2141.020859179986!2d5.4228686788710245!3d50.34571864538735!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c04fe9391621f9%3A0xac7adc1264d1c8a3!2sBoszicht%20Durbuy!5e0!3m2!1snl!2sbe!4v1730887248650!5m2!1snl!2sbe"
-				 width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-
-			</div><!--/.container-->
-		<!--KAART Einde -->
 
 	
 		<!--contact start-->
@@ -401,8 +473,9 @@
 								<p>
 								</p>
 								<div class="footer-contact">
-									<p>boszichtdurbuy@gmail.com</p>
-									<p>+32 468 00 25 49</p>
+									<a style="color: white; font-family: Poppins; font-size: medium; text-transform:none;" href="mailto:boszichtdurbuy@gmail.com">Boszichtdurbuy@gmail.com</a>
+									<a style="color: white; font-family: Poppins; font-size: medium; text-transform:none;" href="tel:+32468002549">+32 468 00 25 49</a>
+
 								</div>
 							</div>
 						</div>
