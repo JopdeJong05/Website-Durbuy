@@ -4,76 +4,206 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Accommodatie Aanvraagformulier</title>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    (function () {
+      emailjs.init("i0ju2FlG4VVfdFb3S");
+    })();
+  </script>
+  <script>
+    window.onload = function () {
+      const form = document.getElementById('contact-form');
+      const confirmationBox = document.getElementById('confirmation');
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        emailjs.sendForm('contact_service', 'contact_form', this)
+          .then(() => {
+            showConfirmation();
+            form.reset();
+          }, (error) => {
+            console.error('Fout bij verzenden:', error);
+            alert("Er is iets misgegaan. Probeer opnieuw.");
+          });
+      });
+
+      function showConfirmation() {
+        confirmationBox.style.display = 'flex';
+        setTimeout(() => {
+          confirmationBox.style.display = 'none';
+        }, 5000);
+      }
+
+      document.getElementById('close-confirmation').onclick = function () {
+        confirmationBox.style.display = 'none';
+      };
+    };
+  </script>
   <style>
-    body { font-family: Arial, sans-serif; padding: 20px; }
-    h1 { color: #2c3e50; }
-    select { padding: 5px; margin-bottom: 10px; }
-    form { margin-top: 20px; }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    form {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 600px;
+    }
+
+    form h2 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: bold;
+      color: #2c3e50;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="date"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .date-group {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .date-field {
+      flex: 1;
+      min-width: 240px;
+    }
+
+    input[type="submit"] {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #2980b9;
+    }
+
+    /* ✅ Melding */
+    #confirmation {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .confirmation-box {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+      max-width: 400px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      position: relative;
+    }
+
+    .confirmation-box h3 {
+      margin: 0 0 10px;
+      color: #2c3e50;
+    }
+
+    .confirmation-box p {
+      margin: 0;
+    }
+
+    .confirmation-box button {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      background: none;
+      border: none;
+      font-size: 20px;
+      color: #999;
+      cursor: pointer;
+    }
+
+    .confirmation-box button:hover {
+      color: #333;
+    }
   </style>
 </head>
 <body>
-  <h1>Accommodatie Aanvraagformulier</h1>
-  <form id="bookingForm">
-    <label for="name">Naam:</label><br>
-    <input type="text" id="name" required><br><br>
+  <form id="contact-form">
+    <h2>Accommodatie Aanvraagformulier</h2>
 
-    <label for="email">E-mail:</label><br>
-    <input type="email" id="email" required><br><br>
+    <input type="hidden" name="time" value="Mar 10 2025 08:46">
 
-    <label>Begindatum:</label><br>
-    <select id="startMonth"></select>
-    <select id="startDay"></select><br><br>
+    <label for="name">Naam:</label>
+    <input type="text" id="name" name="name" required>
 
-    <label>Einddatum:</label><br>
-    <select id="endMonth"></select>
-    <select id="endDay"></select><br><br>
+    <label for="email">E-mail:</label>
+    <input type="email" id="email" name="email" required>
 
-    <button type="submit">Aanvragen</button>
+    <label for="phone">Telefoonnummer:</label>
+    <input type="text" id="phone" name="phone" required>
+
+    <div class="date-group">
+      <div class="date-field">
+        <label for="start_date">Begindatum:</label>
+        <input type="date" id="start_date" name="start_date" required>
+      </div>
+      <div class="date-field">
+        <label for="end_date">Einddatum:</label>
+        <input type="date" id="end_date" name="end_date" required>
+      </div>
+    </div>
+
+    <label for="message">Bericht:</label>
+    <textarea id="message" name="message" required></textarea>
+
+    <input type="submit" value="Verstuur">
   </form>
 
-  <script>
-    const months = [
-      { name: 'Januari', days: 31 }, { name: 'Februari', days: 28 }, { name: 'Maart', days: 31 },
-      { name: 'April', days: 30 }, { name: 'Mei', days: 31 }, { name: 'Juni', days: 30 },
-      { name: 'Juli', days: 31 }, { name: 'Augustus', days: 31 }, { name: 'September', days: 30 },
-      { name: 'Oktober', days: 31 }, { name: 'November', days: 30 }, { name: 'December', days: 31 }
-    ];
-
-    function generateMonthOptions(selectElement) {
-      months.forEach((month, index) => {
-        const option = document.createElement('option');
-        option.value = index + 1;
-        option.textContent = month.name;
-        selectElement.appendChild(option);
-      });
-    }
-
-    function generateDayOptions(selectElement, monthIndex) {
-      selectElement.innerHTML = '';
-      const daysInMonth = months[monthIndex].days;
-      for (let day = 1; day <= daysInMonth; day++) {
-        const option = document.createElement('option');
-        option.value = day;
-        option.textContent = day;
-        selectElement.appendChild(option);
-      }
-    }
-
-    generateMonthOptions(document.getElementById('startMonth'));
-    generateMonthOptions(document.getElementById('endMonth'));
-
-    document.getElementById('startMonth').onchange = () => generateDayOptions(document.getElementById('startDay'), document.getElementById('startMonth').value - 1);
-    document.getElementById('endMonth').onchange = () => generateDayOptions(document.getElementById('endDay'), document.getElementById('endMonth').value - 1);
-
-    document.getElementById('bookingForm').onsubmit = function(e) {
-      e.preventDefault();
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const start = `${document.getElementById('startDay').value}-${document.getElementById('startMonth').value}`;
-      const end = `${document.getElementById('endDay').value}-${document.getElementById('endMonth').value}`;
-
-      alert(`Aanvraag verzonden:\nNaam: ${name}\nE-mail: ${email}\nPeriode: ${start} tot ${end}`);
-    };
-  </script>
+  <!-- ✅ Bevestiging Melding -->
+  <div id="confirmation">
+    <div class="confirmation-box">
+      <button id="close-confirmation">&times;</button>
+      <h3>Bedankt voor je aanvraag!</h3>
+      <p>We nemen zo snel mogelijk contact met je op.</p>
+    </div>
+  </div>
 </body>
 </html>

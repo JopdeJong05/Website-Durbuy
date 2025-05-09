@@ -16,8 +16,15 @@
         <!-- title of site -->
         <title>Boszicht Durbuy</title>
 
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+		<!-- Bootstrap JS -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
         <!-- For favicon png -->
 		<link rel="shortcut icon" type="image/icon" href="assets/logo/icon.png"/>
+
+		<link rel="stylesheet" href="assets/css/aanvraag.css">
        
         <!--font-awesome.min.css-->
         <link rel="stylesheet" href="assets/css/font-awesome.min.css">
@@ -46,6 +53,9 @@
         
         <!--responsive.css-->
         <link rel="stylesheet" href="assets/css/responsive.css">
+
+		<link rel="stylesheet" href="assets/css/accordion.css">
+
 		
 		
 		<link rel="stylesheet" href="OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css">
@@ -53,6 +63,7 @@
 
 		<!-- Lightbox2 CSS -->
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -125,7 +136,169 @@
       }
     }
   </style>
-       
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    (function () {
+      emailjs.init("i0ju2FlG4VVfdFb3S");
+    })();
+  </script>
+  <script>
+    window.onload = function () {
+      const form = document.getElementById('contact-form');
+      const confirmationBox = document.getElementById('confirmation');
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        emailjs.sendForm('contact_service', 'contact_form', this)
+          .then(() => {
+            showConfirmation();
+            form.reset();
+          }, (error) => {
+            console.error('Fout bij verzenden:', error);
+            alert("Er is iets misgegaan. Probeer opnieuw.");
+          });
+      });
+
+      function showConfirmation() {
+        confirmationBox.style.display = 'flex';
+        setTimeout(() => {
+          confirmationBox.style.display = 'none';
+        }, 10000);
+      }
+
+      document.getElementById('close-confirmation').onclick = function () {
+        confirmationBox.style.display = 'none';
+      };
+    };
+  </script>
+  <style>
+    .body1 {
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      margin-top: 10vh;
+    }
+
+    form {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 600px;
+    }
+
+    form h2 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: bold;
+      color: #2c3e50;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="date"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .date-group {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .date-field {
+      flex: 1;
+      min-width: 240px;
+    }
+
+    input[type="submit"] {
+      background-color: #097040;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #203f30;
+    }
+
+	input[type="submit"]:active {
+      background-color: #097040;
+    }
+
+    /* ✅ Melding */
+    #confirmation {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .confirmation-box {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+      max-width: 400px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      position: relative;
+    }
+
+    .confirmation-box h3 {
+      margin: 0 0 10px;
+      color: #097040;
+    }
+
+    .confirmation-box p {
+      margin: 0;
+    }
+
+    .confirmation-box button {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      background: none;
+      border: none;
+      font-size: 20px;
+      color: #999;
+      cursor: pointer;
+    }
+
+    .confirmation-box button:hover {
+      color: #333;
+    }
+  </style>
 
     </head>
 
@@ -156,10 +329,9 @@
 				            <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
 				                <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
 				                    <li class=" scroll active"><a href="#home">home</a></li>
-									<li class="scroll"><a href="#accommodatie">Accommodatie</a></li>
-									<li class="scroll"><a href="#park">Park</a></li>
+									<li class="scroll"><a href="#accommodatie">Accommodatie</a></li>	  
 				                    <li class="scroll"><a href="#omgeving">Omgeving</a></li>
-				                    <li class="scroll"><a href="#kaart">Kaart</a></li>
+				                    <li class="scroll"><a href="#agenda">Agenda</a></li>
 				                    <li class="scroll"><a href="#contact">contact</a></li>
 				                </ul><!--/.nav -->
 				            </div><!-- /.navbar-collapse -->
@@ -202,7 +374,8 @@
 			
 		</section>
 		<!--accomodatie foto begin-->
-		<div class="section-header">
+		<section id="accommodatie">
+		<div class="section-header" style="margin-top: 5%;">
 			<h2>De Accommodatie</h2>
 		</div><!--/.section-header-->
 
@@ -214,7 +387,7 @@
 			  </div>
 
 		<div style="height: 50px;"></div>
-		<section id="accommodatie">
+
 		 <div class="carousel-wrapper">
 			<div class="owl-carousel owl-theme">
 			  <div class="item">
@@ -253,6 +426,14 @@
 				<div class="inner">
 				  <a href="/assets/images/selectie/5.jpg" data-lightbox="galerij">
 					<img src="/assets/images/selectie/5.jpg" alt="Foto 5">
+				  </a>
+				</div>
+			  </div>
+
+			  <div class="item">
+				<div class="inner">
+				  <a href="/assets/images/selectie/6.jpg" data-lightbox="galerij">
+					<img src="/assets/images/selectie/cropped/6.png" alt="Foto 5">
 				  </a>
 				</div>
 			  </div>
@@ -305,6 +486,14 @@
 				</div>
 			  </div>
 
+			  <div class="item">
+				<div class="inner">
+				  <a href="/assets/images/selectie/13.jpg" data-lightbox="galerij">
+					<img src="/assets/images/selectie/cropped/13.png" alt="Foto 5">
+				  </a>
+				</div>
+			  </div>
+
 			</div>
 		  </div>
 		
@@ -347,7 +536,6 @@
 		
 		<!--accomodatie foto end-->
 
-
 		<!--Park -->
 			<section id="park" div class="container">
 				<div class="section-header">
@@ -361,7 +549,7 @@
 									<div class="col-md-7 col-sm-12">
 										<div class="new-cars-img">
 											<img src="/assets/images/foto's park/Brasserie.jpg" alt="img"/>
-										</div><!--/.new-cars-img-->
+										</div>
 									</div>
 									<div class="col-md-5 col-sm-12">
 										<div class="new-cars-txt">
@@ -372,18 +560,18 @@
 											<button class="welcome-btn new-cars-btn" onclick="window.location.href='https://brasseriesunclass.be/'">
 												Website
 											</button>
-										</div><!--/.new-cars-txt-->	
-									</div><!--/.col-->
-								</div><!--/.row-->
-							</div><!--/.single-new-cars-item-->
-						</div><!--/.new-cars-item-->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 						<div class="new-cars-item">
 							<div class="single-new-cars-item">
 								<div class="row">
 									<div class="col-md-7 col-sm-12">
 										<div class="new-cars-img">
 											<img src="/assets/images/foto's park/Receptie.jpg" alt="img"/>
-										</div><!--/.new-cars-img-->
+										</div>
 									</div>
 									<div class="col-md-5 col-sm-12">
 										<div class="new-cars-txt">
@@ -392,18 +580,18 @@
 												Bij aankomst en vertrek vragen wij u vriendelijk om langs de receptie te gaan. Uw bungalow is vanaf 15.00 uur beschikbaar. Natuurlijk bent u eerder welkom en kunt u al genieten van de faciliteiten van het park. Als u van plan bent om na sluitingstijd van de receptie aan te komen, neem dan vooraf contact met ons op om de overdracht van de sleutel te regelen.											
 											</p>
 											
-										</div><!--/.new-cars-txt-->	
-									</div><!--/.col-->
-								</div><!--/.row-->	
-							</div><!--/.single-new-cars-item-->
-						</div><!--/.new-cars-item-->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 						<div class="new-cars-item">
 							<div class="single-new-cars-item">
 								<div class="row">
 									<div class="col-md-7 col-sm-12">
 										<div class="new-cars-img">
 											<img src="/assets/images/foto's park/zwembad.jpg" alt="img"/>
-										</div><!--/.new-cars-img-->
+										</div>
 									</div>
 									<div class="col-md-5 col-sm-12">
 										<div class="new-cars-txt">
@@ -419,16 +607,60 @@
 												<br>	
 												Het zwembad is uitsluitend toegankelijk voor de leden van Sunclass en gasten die op het park verblijven.											</p>
 											
-										</div><!--/.new-cars-txt-->	
-									</div><!--/.col-->
-								</div><!--/.row-->
-							</div><!--/.single-new-cars-item-->
-						</div><!--/.new-cars-item-->
-					</div><!--/#new-cars-carousel-->
-				</div><!--/.new-cars-content-->
-			</div><!--/.container-->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 
-		</section><!--/.new-cars-->
+						<div class="new-cars-item">
+							<div class="single-new-cars-item">
+								<div class="row">
+									<div class="col-md-7 col-sm-12">
+										<div class="new-cars-img">
+											<img src="/assets/images/selectie/cropped/sport.png" alt="img"/>
+										</div>
+									</div>
+									<div class="col-md-5 col-sm-12">
+										<div class="new-cars-txt">
+											<h2><a href="#">Sportfaciliteiten</a></h2>
+											<p>
+												Het park is ook uitgerust met diverse sportfaciliteiten. Denk hierbij aan: <br> ○  Tennisveld <br> ○  Basketbalveld <br> ○  Voetbalveld <br> ○  Volleybalveld <br> ○  Pingppongtafels <br> ○  Petanquebaan
+												<br> <br> Ook aan de fietsers is gedacht. Langs de receptie is namelijk een fietswasplaats te vinden.						
+											</p>
+											
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="new-cars-item">
+							<div class="single-new-cars-item">
+								<div class="row">
+									<div class="col-md-7 col-sm-12">
+										<div class="new-cars-img">
+											<img src="/assets/images/selectie/cropped/klimrek.png" alt="img"/>
+										</div>
+									</div>
+									<div class="col-md-5 col-sm-12">
+										<div class="new-cars-txt">
+											<h2><a href="#">Speeltuin</a></h2>
+											<p>
+												Langs de receptie en brasserie is een speel gedeelte voor de kinderen, uitgerust met een schommel, glijbaan en klimrek.									
+											</p>
+											
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+
+					</div>
+				</div>
+			</div>
+		</section>
 		<!--Park end -->
 
 		
@@ -457,9 +689,56 @@
 			scrolling="no">
 			</iframe>
 
-			<button class="welcome-btn" onclick="window.location.href='mailto:boszichtdurbuy@gmail.com?subject=Boekingsaanvraag%20-%20Boszicht&body=Ik%20wil%20graag%20een%20boeking%20aanvragen%20voor%20volgende%20periode:%0A%0AAankomstdatum:%0AVertrekdatum:%0A%0AExtra%20vragen?%20Stel%20ze%20hieronder:'">
-			Reserveer hier
-			</button>
+			<body>
+
+				<div class="body1">
+
+					<form id="contact-form">
+					<h2>Boekingsformulier</h2>
+				
+					<input type="hidden" name="time" value="Mar 10 2025 08:46">
+				
+					<label for="name">Naam:</label>
+					<input type="text" id="name" name="name" required>
+				
+					<label for="email">E-mail:</label>
+					<input type="email" id="email" name="email" required>
+				
+					<label for="phone">Telefoonnummer (optioneel):</label>
+					<input type="text" id="phone" name="phone">
+				
+					<div class="date-group">
+						<div class="date-field">
+						<label for="start_date">Begindatum:</label>
+						<input type="date" id="start_date" name="start_date" required>
+						</div>
+						<div class="date-field">
+						<label for="end_date">Einddatum:</label>
+						<input type="date" id="end_date" name="end_date" required>
+						</div>
+					</div>
+				
+					<label for="message">Extra vragen? (optioneel):</label>
+					<textarea id="message" name="message"></textarea>
+				
+					<input type="submit" value="Verstuur">
+					</form>
+				
+					<!-- ✅ Bevestiging Melding -->
+					<div id="confirmation">
+					<div class="confirmation-box">
+						<button id="close-confirmation">&times;</button>
+						<h3 style="text-transform: none;" >Bedankt voor je aanvraag!</h3>
+						<p style="text-transform: none;">Je ontvangt zo een bevestigingsmail</p>
+					</div>
+					</div>
+
+					<p style="margin-left: 5vh; font-family:Poppins">
+						Op bovenstaande agenda kunt u zien welke periodes nog beschikbaar zijn om te reserveren. Nadat u een keuze heeft gemaakt kunt u dit invullen in het boekingsformulier hierlangs.
+					</p>
+					
+				</div>
+			  </body>
 			  
 			  
 		</div>

@@ -1,0 +1,837 @@
+<!doctype html>
+<html class="no-js" lang="nl">
+
+    <head>
+        <!-- meta data -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+        <!--font-family-->
+		<link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+		<link href="https://fonts.googleapis.com/css?family=Rufina:400,700" rel="stylesheet">
+        
+        <!-- title of site -->
+        <title>Boszicht Durbuy</title>
+
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+		<!-- Bootstrap JS -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+        <!-- For favicon png -->
+		<link rel="shortcut icon" type="image/icon" href="assets/logo/icon.png"/>
+
+		<link rel="stylesheet" href="assets/css/aanvraag.css">
+       
+        <!--font-awesome.min.css-->
+        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+
+        <!--linear icon css-->
+		<link rel="stylesheet" href="assets/css/linearicons.css">
+
+        <!--flaticon.css-->
+		<link rel="stylesheet" href="assets/css/flaticon.css">
+
+		<!--animate.css-->
+        <link rel="stylesheet" href="assets/css/animate.css">
+
+        <!--owl.carousel.css-->
+        <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+		<link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
+		
+        <!--bootstrap.min.css-->
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+		
+		<!-- bootsnav -->
+		<link rel="stylesheet" href="assets/css/bootsnav.css" >	
+        
+        <!--style.css-->
+        <link rel="stylesheet" href="assets/css/style.css">
+        
+        <!--responsive.css-->
+        <link rel="stylesheet" href="assets/css/responsive.css">
+
+		<link rel="stylesheet" href="assets/css/accordion.css">
+
+		
+		
+		<link rel="stylesheet" href="OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css">
+  		<link rel="stylesheet" href="OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css">
+
+		<!-- Lightbox2 CSS -->
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<style>
+			
+    .carousel-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 10px;
+    }
+
+    .owl-carousel .item {
+      padding: 0 5px;
+    }
+
+    .inner {
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .inner img {
+      width: 110%;
+      height: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      display: block;
+    }
+
+
+    .owl-carousel .center .inner img {
+      box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+    }
+
+	.owl-nav {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 20px; 
+}
+
+.owl-nav button.owl-prev,
+.owl-nav button.owl-next {
+  background: #333;
+  color: white;
+  border: none;
+  padding: 12px 16px;
+  font-size: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.owl-nav button span {
+  display: none;
+}
+
+.owl-nav button.owl-prev::after {
+  content: "←";
+}
+
+.owl-nav button.owl-next::after {
+  content: "→";
+}
+
+
+	
+    /* Iets grotere afbeelding op mobiel */
+    @media (max-width: 599px) {
+      .inner img {
+        max-width: 90vw;
+        margin: 0 auto;
+      }
+    }
+  </style>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    (function () {
+      emailjs.init("i0ju2FlG4VVfdFb3S");
+    })();
+  </script>
+  <script>
+    window.onload = function () {
+      const form = document.getElementById('contact-form');
+      const confirmationBox = document.getElementById('confirmation');
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        emailjs.sendForm('contact_service', 'contact_form', this)
+          .then(() => {
+            showConfirmation();
+            form.reset();
+          }, (error) => {
+            console.error('Fout bij verzenden:', error);
+            alert("Er is iets misgegaan. Probeer opnieuw.");
+          });
+      });
+
+      function showConfirmation() {
+        confirmationBox.style.display = 'flex';
+        setTimeout(() => {
+          confirmationBox.style.display = 'none';
+        }, 10000);
+      }
+
+      document.getElementById('close-confirmation').onclick = function () {
+        confirmationBox.style.display = 'none';
+      };
+    };
+  </script>
+  <style>
+    .body1 {
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      margin-top: 10vh;
+    }
+
+    form {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 600px;
+    }
+
+    form h2 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: bold;
+      color: #2c3e50;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="date"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .date-group {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .date-field {
+      flex: 1;
+      min-width: 240px;
+    }
+
+    input[type="submit"] {
+      background-color: #097040;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #203f30;
+    }
+
+	input[type="submit"]:active {
+      background-color: #097040;
+    }
+
+    /* ✅ Melding */
+    #confirmation {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .confirmation-box {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+      max-width: 400px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      position: relative;
+    }
+
+    .confirmation-box h3 {
+      margin: 0 0 10px;
+      color: #097040;
+    }
+
+    .confirmation-box p {
+      margin: 0;
+    }
+
+    .confirmation-box button {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      background: none;
+      border: none;
+      font-size: 20px;
+      color: #999;
+      cursor: pointer;
+    }
+
+    .confirmation-box button:hover {
+      color: #333;
+    }
+  </style>
+
+    </head>
+
+	<body>
+		
+		<!--welcome-hero start -->
+		<section id="home" class="welcome-hero">
+
+			<!-- top-area Start -->
+			<div class="top-area">
+				<div class="header-area">
+					<!-- Start Navigation -->
+				    <nav class="navbar navbar-default bootsnav  navbar-sticky navbar-scrollspy"  data-minus-value-desktop="70" data-minus-value-mobile="55" data-speed="1000">
+
+				        <div class="container">
+
+				            <!-- Start Header Navigation -->
+				            <div class="navbar-header">
+				                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
+				                    <i class="fa fa-bars"></i>
+				                </button>
+				                <a class="navbar-brand" href="index.html">Boszicht<span></span></a>
+
+				            </div><!--/.navbar-header-->
+				            <!-- End Header Navigation -->
+
+				            <!-- Collect the nav links, forms, and other content for toggling -->
+				            <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
+				                <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
+				                    <li class=" scroll active"><a href="#home">home</a></li>
+									<li class="scroll"><a href="#accommodatie">Accommodatie</a></li>
+									
+											  <li class="dropdown">
+												<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+												<ul class="dropdown-menu">
+												  <li><a href="#">Action</a></li>
+												  <li><a href="#">Another action</a></li>
+												  <li><a href="#">Something else here</a></li>
+												  <li role="separator" class="divider"></li>
+												  <li><a href="#">Separated link</a></li>
+												  <li role="separator" class="divider"></li>
+												  <li><a href="#">One more separated link</a></li>
+												</ul>
+											  </li>
+									
+				                    <li class="scroll"><a href="#omgeving">Omgeving</a></li>
+				                    <li class="scroll"><a href="#kaart">Kaart</a></li>
+				                    <li class="scroll"><a href="#contact">contact</a></li>
+				                </ul><!--/.nav -->
+				            </div><!-- /.navbar-collapse -->
+				        </div><!--/.container-->
+				    </nav><!--/nav-->
+				    <!-- End Navigation -->
+				</div><!--/.header-area-->
+			    <div class="clearfix"></div>
+
+			</div><!-- /.top-area-->
+			<!-- top-area End -->
+
+			<div class="container">
+				<div class="welcome-hero-txt">
+					<h2>Boszicht</h2>
+					<p>
+						"Beleef natuur en rust,<br>		
+						 jouw chalet midden in de bossen van Durbuy"
+					</p>
+					<button class="welcome-btn" onclick="scrollToSection()">Bekijk Beschikbaarheid</button>
+
+					<script>
+					  function scrollToSection() {
+						const section = document.getElementById('agenda');
+						if (section) {
+						  const sectionPosition = section.getBoundingClientRect().top + window.scrollY;
+						  const offset = window.innerHeight / 2 - section.offsetHeight / 2;
+						  window.scrollTo({
+							top: sectionPosition - offset,
+							behavior: 'smooth'
+						  });
+						}
+					  }
+					</script>
+					
+					
+				</div>
+			</div>
+
+			
+		</section>
+		<!--accomodatie foto begin-->
+		<section id="accommodatie">
+		<div class="section-header" style="margin-top: 5%;">
+			<h2>De Accommodatie</h2>
+		</div><!--/.section-header-->
+
+			<div class="container" style="margin-top: 1%; text-align: center;">
+				<p>Welkom bij Vakantiehuisje 'Boszicht'!
+					Gelegen tussen de boomtoppen en aan de rand van een berg, slechts 3,5 km van het centrum van Durbuy. Geniet hier van rust, natuur en volop activiteiten: wandelen, fietsen, vissen, kajakken en golfen. Ontdek de serene omgeving en avontuurlijke opties, zoals Adventure Valley. Dit is de ideale plek voor een ontspannen én actieve vakantie!
+					<br>
+					Boek nu uw verblijf en beleef een onvergetelijke tijd in Boszicht.</p>
+			  </div>
+
+		<div style="height: 50px;"></div>
+
+		 <div class="carousel-wrapper">
+			<div class="owl-carousel owl-theme">
+			  <div class="item">
+				<div class="inner">
+				  <a href="/assets/images/selectie/1.jpg" data-lightbox="galerij">
+					<img src="/assets/images/selectie/1.jpg" alt="Foto 1">
+				  </a>
+				</div>
+			  </div>
+
+			  <div class="item">
+				<div class="inner">
+				  <a href="/assets/images/selectie/2.jpg" data-lightbox="galerij">
+					<img src="/assets/images/selectie/2.jpg" alt="Foto 2">
+				  </a>
+				</div>
+			  </div>
+
+			  <div class="item">
+				<div class="inner">
+				  <a href="/assets/images/selectie/3.jpg" data-lightbox="galerij">
+					<img src="/assets/images/selectie/3.jpg" alt="Foto 3">
+				  </a>
+				</div>
+			  </div>
+
+			  <div class="item">
+				<div class="inner">
+				  <a href="/assets/images/selectie/4.jpg" data-lightbox="galerij">
+					<img src="/assets/images/selectie/4.jpg" alt="Foto 4">
+				  </a>
+				</div>
+			  </div>
+
+			  <div class="item">
+				<div class="inner">
+				  <a href="/assets/images/selectie/5.jpg" data-lightbox="galerij">
+					<img src="/assets/images/selectie/5.jpg" alt="Foto 5">
+				  </a>
+				</div>
+			  </div>
+
+			  <div class="item">
+				<div class="inner">
+				  <a href="/assets/images/selectie/6.jpg" data-lightbox="galerij">
+					<img src="/assets/images/selectie/cropped/6.png" alt="Foto 5">
+				  </a>
+				</div>
+			  </div>
+
+			  <div class="item">
+				<div class="inner">
+				  <a href="/assets/images/selectie/7.jpg" data-lightbox="galerij">
+					<img src="/assets/images/selectie/7.jpg" alt="Foto 5">
+				  </a>
+				</div>
+			  </div>
+
+			  <div class="item">
+				<div class="inner">
+				  <a href="/assets/images/selectie/8.jpg" data-lightbox="galerij">
+					<img src="/assets/images/selectie/8.jpg" alt="Foto 5">
+				  </a>
+				</div>
+			  </div>
+
+			  <div class="item">
+				<div class="inner">
+				  <a href="/assets/images/selectie/9.jpg" data-lightbox="galerij">
+					<img src="/assets/images/selectie/9.jpg" alt="Foto 5">
+				  </a>
+				</div>
+			  </div>
+
+			  <div class="item">
+				<div class="inner">
+				  <a href="/assets/images/selectie/10.jpg" data-lightbox="galerij">
+					<img src="/assets/images/selectie/10.jpg" alt="Foto 5">
+				  </a>
+				</div>
+			  </div>
+
+			  <div class="item">
+				<div class="inner">
+				  <a href="/assets/images/selectie/11.jpg" data-lightbox="galerij">
+					<img src="/assets/images/selectie/11.jpg" alt="Foto 5">
+				  </a>
+				</div>
+			  </div>
+
+			  <div class="item">
+				<div class="inner">
+				  <a href="/assets/images/selectie/12.jpg" data-lightbox="galerij">
+					<img src="/assets/images/selectie/12.jpg" alt="Foto 5">
+				  </a>
+				</div>
+			  </div>
+
+			  <div class="item">
+				<div class="inner">
+				  <a href="/assets/images/selectie/13.jpg" data-lightbox="galerij">
+					<img src="/assets/images/selectie/cropped/13.png" alt="Foto 5">
+				  </a>
+				</div>
+			  </div>
+
+			</div>
+		  </div>
+		
+		   <!-- Scripts -->
+			<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+			<script src="OwlCarousel2-2.3.4/dist/owl.carousel.min.js"></script>
+
+			<!-- Lightbox2 JS -->
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+
+			<script>
+				$(document).ready(function(){
+				  $(".owl-carousel").owlCarousel({
+					loop: true,
+					center: true,
+					margin: 10,
+					nav: true,
+					dots: false,
+					autoplay: true,
+					autoplayTimeout: 4000,
+					autoplayHoverPause: true,
+					responsive: {
+					  0: {
+						items: 1,
+						center: false
+					  },
+					  600: {
+						items: 2,
+						center: true
+					  },
+					  1000: {
+						items: 4,
+						center: true
+					  }
+					}
+				  });
+				});
+			  </script>
+		</section>
+		
+		<!--accomodatie foto end-->
+
+		<!--Park -->
+			<section id="park" div class="container">
+				<div class="section-header">
+				<h2>Het Park</h2>
+				</div><!--/.section-header-->
+				<div class="new-cars-content">
+					<div class="owl-carousel owl-theme" id="new-cars-carousel">
+						<div class="new-cars-item">
+							<div class="single-new-cars-item">
+								<div class="row">
+									<div class="col-md-7 col-sm-12">
+										<div class="new-cars-img">
+											<img src="/assets/images/foto's park/Brasserie.jpg" alt="img"/>
+										</div>
+									</div>
+									<div class="col-md-5 col-sm-12">
+										<div class="new-cars-txt">
+											<h2><a href="#">De Brasserie</span></a></h2>
+											<p>
+												In de brasserie "La Brasserie du Parc Sunclass" bent u altijd van harte welkom voor een smakelijke maaltijd, een lichte snack of een verfrissend drankje. Terwijl de kinderen zich vermaken in de nabijgelegen speeltuin, kunnen ouders ontspannen op ons ruime, zonnige terras. Geniet van de rustige sfeer en laat u verwennen met heerlijke lekkernijen, omgeven door groen en gezelligheid.
+											</p>
+											<button class="welcome-btn new-cars-btn" onclick="window.location.href='https://brasseriesunclass.be/'">
+												Website
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="new-cars-item">
+							<div class="single-new-cars-item">
+								<div class="row">
+									<div class="col-md-7 col-sm-12">
+										<div class="new-cars-img">
+											<img src="/assets/images/foto's park/Receptie.jpg" alt="img"/>
+										</div>
+									</div>
+									<div class="col-md-5 col-sm-12">
+										<div class="new-cars-txt">
+											<h2><a href="#">De Receptie</a></h2>
+											<p>
+												Bij aankomst en vertrek vragen wij u vriendelijk om langs de receptie te gaan. Uw bungalow is vanaf 15.00 uur beschikbaar. Natuurlijk bent u eerder welkom en kunt u al genieten van de faciliteiten van het park. Als u van plan bent om na sluitingstijd van de receptie aan te komen, neem dan vooraf contact met ons op om de overdracht van de sleutel te regelen.											
+											</p>
+											
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="new-cars-item">
+							<div class="single-new-cars-item">
+								<div class="row">
+									<div class="col-md-7 col-sm-12">
+										<div class="new-cars-img">
+											<img src="/assets/images/foto's park/zwembad.jpg" alt="img"/>
+										</div>
+									</div>
+									<div class="col-md-5 col-sm-12">
+										<div class="new-cars-txt">
+											<h2><a href="#">Het Zwembad</a></h2>
+											<p>
+												Er is een verwarmd indoor zwembad met rondom een zonneweide. 
+												<br>
+												<br>		
+												Openingstijden:
+												<br>	
+												Buiten de vakantieperiodes: elke dag van 10.00 – 17.00 uur. Op vrijdag van 10.00 – 21.00 uur.
+												<br>	
+												<br>	
+												Het zwembad is uitsluitend toegankelijk voor de leden van Sunclass en gasten die op het park verblijven.											</p>
+											
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="new-cars-item">
+							<div class="single-new-cars-item">
+								<div class="row">
+									<div class="col-md-7 col-sm-12">
+										<div class="new-cars-img">
+											<img src="/assets/images/selectie/cropped/sport.png" alt="img"/>
+										</div>
+									</div>
+									<div class="col-md-5 col-sm-12">
+										<div class="new-cars-txt">
+											<h2><a href="#">Sportfaciliteiten</a></h2>
+											<p>
+												Het park is ook uitgerust met diverse sportfaciliteiten. Denk hierbij aan: <br> ○  Tennisveld <br> ○  Basketbalveld <br> ○  Voetbalveld <br> ○  Volleybalveld <br> ○  Pingppongtafels <br> ○  Petanquebaan
+												<br> <br> Ook aan de fietsers is gedacht. Langs de receptie is namelijk een fietswasplaats te vinden.						
+											</p>
+											
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="new-cars-item">
+							<div class="single-new-cars-item">
+								<div class="row">
+									<div class="col-md-7 col-sm-12">
+										<div class="new-cars-img">
+											<img src="/assets/images/selectie/cropped/klimrek.png" alt="img"/>
+										</div>
+									</div>
+									<div class="col-md-5 col-sm-12">
+										<div class="new-cars-txt">
+											<h2><a href="#">Speeltuin</a></h2>
+											<p>
+												Langs de receptie en brasserie is een speel gedeelte voor de kinderen, uitgerust met een schommel, glijbaan en klimrek.									
+											</p>
+											
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+
+					</div>
+				</div>
+			</div>
+		</section>
+		<!--Park end -->
+
+		
+
+		<!-- AGENDA Begin -->
+	<section id= "agenda">
+		<style >
+			.container iframe {
+			border: none; /* Verwijder standaardrand */
+			box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Schaduweffect */
+			border-radius: 10px; /* Afgeronde hoeken */
+			transition: box-shadow 0.3s ease-in-out; /* Zachte animatie bij hover */
+			margin-top: 5%;
+			}
+		
+			.container iframe:hover {
+			box-shadow: 0 16px 25px rgba(0, 0, 0, 0.4); /* Iets sterkere schaduw bij hover */
+			}
+		</style>
+		
+		<div class="container" style="margin-bottom: 10%;">
+			<iframe 
+			src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FBrussels&showPrint=0&showTitle=0&showCalendars=0&showTz=0&src=Ym9zemljaHRkdXJidXlAZ21haWwuY29t&color=%23039BE5" 
+			style="border-width:0px; width:100%; height:300px;" 
+			frameborder="0" 
+			scrolling="no">
+			</iframe>
+
+			<body>
+
+				<div class="body1">
+
+					<form id="contact-form">
+					<h2>Boekingsformulier</h2>
+				
+					<input type="hidden" name="time" value="Mar 10 2025 08:46">
+				
+					<label for="name">Naam:</label>
+					<input type="text" id="name" name="name" required>
+				
+					<label for="email">E-mail:</label>
+					<input type="email" id="email" name="email" required>
+				
+					<label for="phone">Telefoonnummer (optioneel):</label>
+					<input type="text" id="phone" name="phone">
+				
+					<div class="date-group">
+						<div class="date-field">
+						<label for="start_date">Begindatum:</label>
+						<input type="date" id="start_date" name="start_date" required>
+						</div>
+						<div class="date-field">
+						<label for="end_date">Einddatum:</label>
+						<input type="date" id="end_date" name="end_date" required>
+						</div>
+					</div>
+				
+					<label for="message">Extra vragen? (optioneel):</label>
+					<textarea id="message" name="message"></textarea>
+				
+					<input type="submit" value="Verstuur">
+					</form>
+				
+					<!-- ✅ Bevestiging Melding -->
+					<div id="confirmation">
+					<div class="confirmation-box">
+						<button id="close-confirmation">&times;</button>
+						<h3 style="text-transform: none;" >Bedankt voor je aanvraag!</h3>
+						<p style="text-transform: none;">Je ontvangt zo een bevestigingsmail</p>
+					</div>
+					</div>
+
+					<p style="margin-left: 5vh; font-family:Poppins">
+						Op bovenstaande agenda kunt u zien welke periodes nog beschikbaar zijn om te reserveren. Nadat u een keuze heeft gemaakt kunt u dit invullen in het boekingsformulier hierlangs.
+					</p>
+					
+				</div>
+			  </body>
+			  
+			  
+		</div>
+	</section>
+  		<!-- AGENDA Einde -->
+
+	
+		<!--contact start-->
+		<footer id="contact"  class="contact">
+			<div class="container">
+				<div class="footer-top">
+					<div class="row">
+						<div class="col-md-3 col-sm-6">
+							<div class="single-footer-widget">
+								<div class="footer-logo">
+									<a href="index.html">Boszicht</a>
+								</div>
+								<p>
+								</p>
+								<div class="footer-contact">
+									<a style="color: white; font-family: Poppins; font-size: medium; text-transform:none;" href="mailto:boszichtdurbuy@gmail.com">Boszichtdurbuy@gmail.com</a>
+									<a style="color: white; font-family: Poppins; font-size: medium; text-transform:none;" href="tel:+32468002549">+32 468 00 25 49</a>
+
+								</div>
+							</div>
+						</div>
+						
+						
+						
+					</div>
+				</div>
+				<div class="footer-copyright">
+					<div class="row">
+						<div class="col-sm-6">
+							
+						</div>
+					</div>
+				</div><!--/.footer-copyright-->
+			</div><!--/.container-->
+
+			<div id="scroll-Top">
+				<div class="return-to-top">
+					<i class="fa fa-angle-up " id="scroll-top" data-toggle="tooltip" data-placement="top" title="" data-original-title="Back to Top" aria-hidden="true"></i>
+				</div>
+				
+			</div><!--/.scroll-Top-->
+			
+        </footer><!--/.contact-->
+		<!--contact end-->
+
+
+		
+		<!-- Include all js compiled plugins (below), or include individual files as needed -->
+
+		<script src="assets/js/jquery.js"></script>
+        
+        <!--modernizr.min.js-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+		
+		<!--bootstrap.min.js-->
+        <script src="assets/js/bootstrap.min.js"></script>
+		
+		<!-- bootsnav js -->
+		<script src="assets/js/bootsnav.js"></script>
+
+		<!--owl.carousel.js-->
+        <script src="assets/js/owl.carousel.min.js"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+
+        <!--Custom JS-->
+        <script src="assets/js/custom.js"></script>
+
+
+		<script src="assets/js/scroll.js"></script>
+
+
+
+        
+    </body>
+	
+</html>
