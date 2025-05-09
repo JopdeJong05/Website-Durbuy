@@ -298,6 +298,25 @@
     .confirmation-box button:hover {
       color: #333;
     }
+
+	@media screen and (max-width: 768px) {
+    .body1 {
+        flex-direction: column; /* Zet de tekst boven het formulier op kleinere schermen */
+        align-items: center; /* Centreer de inhoud */
+    }
+
+    /* Zorg ervoor dat de tekst gecentreerd wordt op mobiele apparaten */
+    .body1 p {
+        text-align: center; /* Centreer de tekst */
+        margin-right: 40px; /* Verwijder de margin-left op kleinere schermen */
+    }
+
+    .body1 form {
+        width: 100%; /* Zorg ervoor dat het formulier de volledige breedte van het scherm op kleinere apparaten gebruikt */
+        max-width: 100%; /* Verwijder de maximum breedte als je wilt dat het formulier altijd de volledige breedte gebruikt */
+    }
+}
+
   </style>
 
     </head>
@@ -329,7 +348,7 @@
 				            <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
 				                <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
 				                    <li class=" scroll active"><a href="#home">home</a></li>
-									<li class="scroll"><a href="#accommodatie">Accommodatie</a></li>	  
+									<li class="scroll"><a href="#accommodatie">Accommodatie</a></li>
 				                    <li class="scroll"><a href="#omgeving">Omgeving</a></li>
 				                    <li class="scroll"><a href="#agenda">Agenda</a></li>
 				                    <li class="scroll"><a href="#contact">contact</a></li>
