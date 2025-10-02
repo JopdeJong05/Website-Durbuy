@@ -750,6 +750,62 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ffffff;}
 }
 
 
+.btn1 {
+    display: inline-block;
+    width: 230px;
+    height: 60px;
+    background: #203f30;
+    color: #fff;
+    border-radius: 3px;
+    margin-top: 55px;
+    transition: .3s linear;
+    text-align: center;
+    line-height: 60px; /* zorgt voor verticale centrering */
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.info-blok {
+    background-color: #ffffff;
+    border-radius: 15px;
+    max-width: 90%;
+    margin: 40px auto;
+    padding: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    color: #333;
+}
+
+.prijstabel {
+  width: 100%;
+  max-width: 600px;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.prijstabel th,
+.prijstabel td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+.prijstabel th {
+  background-color: #f2f2f2;
+}
+
+.note {
+  font-size: 0.95em;
+  color: #555;
+  max-width: 600px;
+}
+
+
+
+
 
 /*========================Thank you=================
 
