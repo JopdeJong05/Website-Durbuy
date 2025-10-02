@@ -685,82 +685,117 @@
 		
 
 		<!-- AGENDA Begin -->
-	<section id= "agenda">
-		<style >
-			.container iframe {
-			border: none; /* Verwijder standaardrand */
-			box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Schaduweffect */
-			border-radius: 10px; /* Afgeronde hoeken */
-			transition: box-shadow 0.3s ease-in-out; /* Zachte animatie bij hover */
-			margin-top: 5%;
-			}
-		
-			.container iframe:hover {
-			box-shadow: 0 16px 25px rgba(0, 0, 0, 0.4); /* Iets sterkere schaduw bij hover */
-			}
-		</style>
-		
-		<div class="container" style="margin-bottom: 10%;">
-			<iframe 
-			src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FBrussels&showPrint=0&showTitle=0&showCalendars=0&showTz=0&src=Ym9zemljaHRkdXJidXlAZ21haWwuY29t&color=%23039BE5" 
-			style="border-width:0px; width:100%; height:300px;" 
-			frameborder="0" 
-			scrolling="no">
-			</iframe>
+<section id="agenda">
+  <style>
+    .container iframe {
+      border: none; 
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      border-radius: 10px; 
+      transition: box-shadow 0.3s ease-in-out;
+      margin-top: 5%;
+    }
+    .container iframe:hover {
+      box-shadow: 0 16px 25px rgba(0, 0, 0, 0.4);
+    }
+    .prijzen-vak {
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      margin-left: 20px;
+    }
+    .prijzen-vak h3 {
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .prijzen-vak table {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    .prijzen-vak th, .prijzen-vak td {
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+    }
+    .prijzen-vak th {
+      background: #eee;
+    }
+  </style>
 
-			<body>
+  <div class="container" style="margin-bottom: 10%;">
+    <iframe 
+      src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FBrussels&showPrint=0&showTitle=0&showCalendars=0&showTz=0&src=Ym9zemljaHRkdXJidXlAZ21haWwuY29t&color=%23039BE5" 
+      style="border-width:0px; width:100%; height:300px;" 
+      frameborder="0" 
+      scrolling="no">
+    </iframe>
 
-				<div class="body1">
+    <div class="row" style="margin-top:30px;">
+      <!-- Formulier links -->
+      <div class="col-md-6">
+        <form id="contact-form">
+          <h2 style="font-weight: bold;">Boekingsformulier</h2>
+          <p style="text-align: center; font-family:Poppins; margin-bottom: 4vh;">
+            Op bovenstaande agenda kan je zien welke periodes nog beschikbaar zijn om te reserveren. Nadat je een keuze hebt gemaakt kan je dit invullen in het boekingsformulier.
+          </p>
+      
+          <label for="name">Naam:</label>
+          <input type="text" id="name" name="name" required>
 
-					<form id="contact-form">
-					<h2 style="font-weight: bold;">Boekingsformulier</h2>
-					<p style="text-align: center; font-family:Poppins; margin-bottom: 4vh;">
-						Op bovenstaande agenda kan je zien welke periodes nog beschikbaar zijn om te reserveren. Nadat je een keuze hebt gemaakt kan je dit invullen in het boekingsformulier.
-					</p>
-				
-					<input type="hidden" name="time" value="Mar 10 2025 08:46">
-				
-					<label for="name">Naam:</label>
-					<input type="text" id="name" name="name" required>
-				
-					<label for="email">E-mail:</label>
-					<input type="email" id="email" name="email" required>
-				
-					<label for="phone">Telefoonnummer (optioneel):</label>
-					<input type="text" id="phone" name="phone">
-				
-					<div class="date-group">
-						<div class="date-field">
-						<label for="start_date">Begindatum:</label>
-						<input type="date" id="start_date" name="start_date" required>
-						</div>
-						<div class="date-field">
-						<label for="end_date">Einddatum:</label>
-						<input type="date" id="end_date" name="end_date" required>
-						</div>
-					</div>
-				
-					<label for="message">Extra vragen? (optioneel):</label>
-					<textarea id="message" name="message"></textarea>
-				
-					<input type="submit" value="Verstuur">
-					</form>
-				
-					<!-- ✅ Bevestiging Melding -->
-					<div id="confirmation">
-					<div class="confirmation-box">
-						<button id="close-confirmation">&times;</button>
-						<h3 style="text-transform: none;" >Bedankt voor je aanvraag!</h3>
-						<p style="text-transform: none;">Je ontvangt zo een bevestigingsmail</p>
-					</div>
-					</div>
-					<button class="welcome-btn" style="margin-left: 4vh;" onclick="window.location.href='prijzen.html';">Bekijk Prijzen</button>
-				</div>
-			  </body>
-			  
-			  
-		</div>
-	</section>
+          <label for="email">E-mail:</label>
+          <input type="email" id="email" name="email" required>
+
+          <label for="phone">Telefoonnummer (optioneel):</label>
+          <input type="text" id="phone" name="phone">
+
+          <div class="date-group">
+            <div class="date-field">
+              <label for="start_date">Begindatum:</label>
+              <input type="date" id="start_date" name="start_date" required>
+            </div>
+            <div class="date-field">
+              <label for="end_date">Einddatum:</label>
+              <input type="date" id="end_date" name="end_date" required>
+            </div>
+          </div>
+
+          <label for="message">Extra vragen? (optioneel):</label>
+          <textarea id="message" name="message"></textarea>
+
+          <input type="submit" value="Verstuur">
+        </form>
+      </div>
+
+        <!-- Prijzen rechts (pc) / onder (gsm) -->
+  <div class="col-md-6 mt-4 mt-md-0 text-center">
+  <div class="prijzen-vak mx-auto" style="max-width: 500px; width: 100%;">
+    <h3>Prijzen Buiten Vakantieperiodes</h3>
+    <table class="table">
+      <tr><th>Periode</th><th>Prijs</th></tr>
+      <tr><td>Week (7 nachten)</td><td>€ 850,-</td></tr>
+      <tr><td>Midweek (4 nachten)</td><td>€ 600,-</td></tr>
+      <tr><td>Weekend (2 nachten)</td><td>€ 430,-</td></tr>
+    </table>
+
+    <h3>Prijzen Vakantieperiodes (BE & NL)</h3>
+    <table class="table">
+      <tr><th>Periode</th><th>Prijs</th></tr>
+      <tr><td>Week (7 nachten)</td><td>€ 1395,-</td></tr>
+      <tr><td>Midweek (4 nachten)</td><td>€ 895,-</td></tr>
+      <tr><td>Weekend (2 nachten)</td><td>€ 575,-</td></tr>
+    </table>
+  </div>
+
+  <div class="alert alert-info mx-auto mt-3" style="max-width: 500px; width: 100%; text-align: center;">
+    <p>
+      Prijzen zijn inclusief schoonmaak, lakensets en parkkosten.<br>
+      Exclusief toeristenbelasting: € 1,- per persoon per nacht.
+    </p>
+  </div>
+</div>
+</section>
+<!-- AGENDA Einde -->
+
 	
   		<!-- AGENDA Einde -->
 
@@ -784,9 +819,6 @@
 								</div>
 							</div>
 						</div>
-						
-						
-						
 					</div>
 				</div>
 				<div class="footer-copyright">

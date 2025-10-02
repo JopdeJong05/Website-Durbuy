@@ -234,6 +234,13 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ffffff;}
 
 /*.welcome-hero-txt*/
 .welcome-hero-txt{text-align: center;padding:290px 0 372px;}
+
+/* Definieer de fade-in animatie */
+@keyframes fadeInPermanent {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
 .welcome-hero-txt h2 {
     font-family: 'Rufina', serif;
     font-size: 65px;
@@ -241,9 +248,13 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ffffff;}
     font-weight: bold;
     text-transform: uppercase;
     margin-bottom: 45px;
-    text-shadow: 10px 10px 50px #000000;
     
-
+    /* Verbeterde schaduw voor scherpe leesbaarheid */
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+    
+    /* START ANIMATIE H2 */
+    opacity: 0; /* Begin onzichtbaar */
+    animation: fadeInPermanent 1.5s ease-in-out forwards; /* Blijf op 100% na afloop */
 }
 .welcome-hero-txt p {
     font-size: 18px;
@@ -252,6 +263,10 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ffffff;}
     font-weight: 500;
     max-width: 735px;
     margin: 0 auto;
+    
+    /* START ANIMATIE P */
+    opacity: 0;
+    animation: fadeInPermanent 1.5s ease-in-out 0.5s forwards; /* 0.5s vertraging, blijf op 100% */
 }
 .welcome-btn {
     display: inline-block;
@@ -261,15 +276,25 @@ nav.navbar.bootsnav .navbar-toggle i{color: #ffffff;}
     color: #fff;
     border-radius: 3px;
     margin-top: 55px;
-    -webkit-transition: .3s linear; 
-    -moz-transition:.3s linear; 
-    -ms-transition:.3s linear; 
-    -o-transition:.3s linear;
-    transition: .3s linear;
+    
+    /* Behoud uw originele hover overgangen */
+    -webkit-transition: background 0.3s linear; 
+    -moz-transition: background 0.3s linear;
+    -ms-transition: background 0.3s linear;
+    -o-transition: background 0.3s linear;
+    transition: background 0.3s linear;
+    
+    /* START ANIMATIE KNOP */
+    opacity: 0;
+    animation: fadeInPermanent 1.5s ease-in-out 1.0s forwards; /* 1.0s vertraging, blijf op 100% */
 }
+
 .welcome-btn:hover{
     background: #097040;
 }
+
+/* Verwijder de oude .is-faded-in klasse, deze is niet meer nodig */
+/* De 'forwards' eigenschap in de animatie zorgt voor de permanente zichtbaarheid */
 /*.welcome-hero-txt*/
 
 /*-------------------------------------
