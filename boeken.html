@@ -10,7 +10,32 @@
     <link rel="shortcut icon" type="image/png" href="assets/logo/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Rufina:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <style>
+        /* ── Flatpickr kalender: clean groen thema ── */
+        .flatpickr-calendar { border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.15); border: none; font-family: var(--font-sans,'Poppins',sans-serif); overflow: hidden; }
+        .flatpickr-months { background: #097040; }
+        .flatpickr-months .flatpickr-month { background: #097040; color: #fff; fill: #fff; height: 44px; }
+        .flatpickr-months .flatpickr-prev-month, .flatpickr-months .flatpickr-next-month { fill: #fff; color: #fff; padding: 10px 14px; }
+        .flatpickr-months .flatpickr-prev-month:hover, .flatpickr-months .flatpickr-next-month:hover { background: rgba(255,255,255,0.18); color: #fff; }
+        .flatpickr-months .flatpickr-prev-month svg, .flatpickr-months .flatpickr-next-month svg { fill: #fff; }
+        .flatpickr-current-month { color: #fff; font-size: 14px; font-weight: 600; padding-top: 9px; }
+        .flatpickr-current-month .flatpickr-monthDropdown-months { background: transparent; border: none; color: #fff; font-weight: 600; font-size: 14px; font-family: inherit; -webkit-appearance: none; appearance: none; cursor: pointer; outline: none; }
+        .flatpickr-current-month .flatpickr-monthDropdown-months option { background: #fff; color: #2c3e50; }
+        .flatpickr-current-month input.cur-year { color: #fff; font-weight: 600; font-size: 14px; }
+        .numInputWrapper:hover { background: rgba(255,255,255,0.12); border-radius: 4px; }
+        .numInputWrapper span.arrowUp::after { border-bottom-color: rgba(255,255,255,0.8); }
+        .numInputWrapper span.arrowDown::after { border-top-color: rgba(255,255,255,0.8); }
+        .flatpickr-weekdays { background: #0b8049; padding: 4px 0; }
+        span.flatpickr-weekday { background: transparent; color: rgba(255,255,255,0.85); font-size: 11px; font-weight: 700; letter-spacing: 0.4px; }
+        .flatpickr-day { border-radius: 8px; font-size: 13px; color: #2c3e50; max-width: 36px; height: 36px; line-height: 36px; border: 1px solid transparent; }
+        .flatpickr-day:hover, .flatpickr-day.prevMonthDay:hover, .flatpickr-day.nextMonthDay:hover { background: #e8f4ee; border-color: #e8f4ee; color: #097040; }
+        .flatpickr-day.today { border-color: #097040; font-weight: 700; }
+        .flatpickr-day.today:hover { background: #097040; color: #fff; border-color: #097040; }
+        .flatpickr-day.selected, .flatpickr-day.selected:hover, .flatpickr-day.startRange, .flatpickr-day.startRange:hover, .flatpickr-day.endRange, .flatpickr-day.endRange:hover { background: #097040; border-color: #097040; color: #fff; font-weight: 600; }
+        .flatpickr-day.inRange { background: #e8f4ee; border-color: #e8f4ee; box-shadow: -5px 0 0 #e8f4ee, 5px 0 0 #e8f4ee; color: #097040; }
+        .flatpickr-day.flatpickr-disabled, .flatpickr-day.flatpickr-disabled:hover { color: #cbd5e0; cursor: not-allowed; background: transparent; border-color: transparent; }
+        .flatpickr-day.prevMonthDay, .flatpickr-day.nextMonthDay { color: #cbd5e0; }
         /* ── Pagina-datumchecker ──────────────────────── */
         .page-checker {
             display: flex; align-items: flex-end; gap: 14px; flex-wrap: wrap;
@@ -96,11 +121,11 @@
             <div class="page-checker">
                 <div class="page-checker__field">
                     <label for="pc_start">Incheckdatum</label>
-                    <input type="date" id="pc_start">
+                    <input type="text" id="pc_start" readonly placeholder="dd/mm/jjjj">
                 </div>
                 <div class="page-checker__field">
                     <label for="pc_end">Uitcheckdatum</label>
-                    <input type="date" id="pc_end">
+                    <input type="text" id="pc_end" readonly placeholder="dd/mm/jjjj">
                 </div>
                 <button class="btn btn--primary page-checker__btn" id="pc_btn">Controleer beschikbaarheid</button>
             </div>
@@ -179,11 +204,11 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label for="start_date">Aankomst</label>
-                        <input type="date" id="start_date" name="start_date" required>
+                        <input type="text" id="start_date" name="start_date" readonly required placeholder="dd/mm/jjjj">
                     </div>
                     <div class="form-group">
                         <label for="end_date">Vertrek</label>
-                        <input type="date" id="end_date" name="end_date" required>
+                        <input type="text" id="end_date" name="end_date" readonly required placeholder="dd/mm/jjjj">
                     </div>
                 </div>
 
@@ -237,6 +262,8 @@
 
 <div id="site-footer"></div>
 
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/nl.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
     (function() { emailjs.init("i0ju2FlG4VVfdFb3S"); })();
@@ -247,23 +274,13 @@
         var start  = document.getElementById("start_date");
         var end    = document.getElementById("end_date");
         var guests = document.getElementById("guests");
-        if (start && end) {
-            var today = new Date().toISOString().split("T")[0];
-            start.setAttribute("min", today);
-            end.setAttribute("min", today);
-            start.addEventListener("change", function() {
-                end.setAttribute("min", start.value);
-                if (end.value && end.value < start.value) end.value = start.value;
-            });
-        }
-
         /* Vul datums/personen voor uit de datumchecker op de homepage */
         var hash = window.location.hash;
         if (hash && hash.indexOf('?') !== -1) {
             var qs = hash.split('?')[1];
             var params = new URLSearchParams(qs);
-            if (start  && params.get('aankomst')) start.value  = params.get('aankomst');
-            if (end    && params.get('vertrek'))  end.value    = params.get('vertrek');
+            if (start  && params.get('aankomst') && start._flatpickr)  start._flatpickr.setDate(params.get('aankomst'));
+            if (end    && params.get('vertrek')  && end._flatpickr)    end._flatpickr.setDate(params.get('vertrek'));
             if (guests && params.get('personen')) guests.value = params.get('personen');
             var formulier = document.getElementById('formulier');
             if (!formulier) formulier = document.querySelector('.form-card');
@@ -280,15 +297,21 @@
         var pcResult = document.getElementById('pc_result');
         if (!pcStart || !pcEnd || !pcBtn) return;
 
-        var today = new Date().toISOString().split('T')[0];
-        pcStart.setAttribute('min', today);
-        pcEnd.setAttribute('min', today);
-        pcStart.addEventListener('change', function () {
-            pcEnd.setAttribute('min', pcStart.value);
-            if (pcEnd.value && pcEnd.value < pcStart.value) pcEnd.value = pcStart.value;
-            pcResult.style.display = 'none';
+        /* flatpickr datumkiezer (dd/mm/jjjj weergave) */
+        var fpPcEnd = flatpickr(pcEnd, {
+            dateFormat: 'Y-m-d', altInput: true, altFormat: 'd/m/Y',
+            minDate: 'today', locale: 'nl',
+            onChange: function () { pcResult.style.display = 'none'; }
         });
-        pcEnd.addEventListener('change', function () { pcResult.style.display = 'none'; });
+        var fpPcStart = flatpickr(pcStart, {
+            dateFormat: 'Y-m-d', altInput: true, altFormat: 'd/m/Y',
+            minDate: 'today', locale: 'nl',
+            onChange: function (sel, dateStr) {
+                fpPcEnd.set('minDate', dateStr);
+                if (fpPcEnd.selectedDates[0] && fpPcEnd.selectedDates[0] <= sel[0]) fpPcEnd.clear();
+                pcResult.style.display = 'none';
+            }
+        });
 
         pcBtn.addEventListener('click', function () {
             if (!pcStart.value || !pcEnd.value) {
@@ -309,8 +332,8 @@
                         /* Kopieer datums ook naar het boekformulier */
                         var s = document.getElementById('start_date');
                         var e = document.getElementById('end_date');
-                        if (s) s.value = pcStart.value;
-                        if (e) e.value = pcEnd.value;
+                        if (s && s._flatpickr) s._flatpickr.setDate(pcStart.value);
+                        if (e && e._flatpickr) e._flatpickr.setDate(pcEnd.value);
                     } else if (ok === false) {
                         showR('unavailable', '✗', 'Deze periode is helaas (deels) bezet. Kies andere data via de kalender hieronder.', null, null);
                     } else {

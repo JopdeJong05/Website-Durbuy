@@ -10,8 +10,33 @@
     <link rel="shortcut icon" type="image/png" href="assets/logo/icon.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Rufina:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
     <style>
+        /* ── Flatpickr kalender: clean groen thema ── */
+        .flatpickr-calendar { border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.15); border: none; font-family: var(--font-sans,'Poppins',sans-serif); overflow: hidden; }
+        .flatpickr-months { background: #097040; }
+        .flatpickr-months .flatpickr-month { background: #097040; color: #fff; fill: #fff; height: 44px; }
+        .flatpickr-months .flatpickr-prev-month, .flatpickr-months .flatpickr-next-month { fill: #fff; color: #fff; padding: 10px 14px; }
+        .flatpickr-months .flatpickr-prev-month:hover, .flatpickr-months .flatpickr-next-month:hover { background: rgba(255,255,255,0.18); color: #fff; }
+        .flatpickr-months .flatpickr-prev-month svg, .flatpickr-months .flatpickr-next-month svg { fill: #fff; }
+        .flatpickr-current-month { color: #fff; font-size: 14px; font-weight: 600; padding-top: 9px; }
+        .flatpickr-current-month .flatpickr-monthDropdown-months { background: transparent; border: none; color: #fff; font-weight: 600; font-size: 14px; font-family: inherit; -webkit-appearance: none; appearance: none; cursor: pointer; outline: none; }
+        .flatpickr-current-month .flatpickr-monthDropdown-months option { background: #fff; color: #2c3e50; }
+        .flatpickr-current-month input.cur-year { color: #fff; font-weight: 600; font-size: 14px; }
+        .numInputWrapper:hover { background: rgba(255,255,255,0.12); border-radius: 4px; }
+        .numInputWrapper span.arrowUp::after { border-bottom-color: rgba(255,255,255,0.8); }
+        .numInputWrapper span.arrowDown::after { border-top-color: rgba(255,255,255,0.8); }
+        .flatpickr-weekdays { background: #0b8049; padding: 4px 0; }
+        span.flatpickr-weekday { background: transparent; color: rgba(255,255,255,0.85); font-size: 11px; font-weight: 700; letter-spacing: 0.4px; }
+        .flatpickr-day { border-radius: 8px; font-size: 13px; color: #2c3e50; max-width: 36px; height: 36px; line-height: 36px; border: 1px solid transparent; }
+        .flatpickr-day:hover, .flatpickr-day.prevMonthDay:hover, .flatpickr-day.nextMonthDay:hover { background: #e8f4ee; border-color: #e8f4ee; color: #097040; }
+        .flatpickr-day.today { border-color: #097040; font-weight: 700; }
+        .flatpickr-day.today:hover { background: #097040; color: #fff; border-color: #097040; }
+        .flatpickr-day.selected, .flatpickr-day.selected:hover, .flatpickr-day.startRange, .flatpickr-day.startRange:hover, .flatpickr-day.endRange, .flatpickr-day.endRange:hover { background: #097040; border-color: #097040; color: #fff; font-weight: 600; }
+        .flatpickr-day.inRange { background: #e8f4ee; border-color: #e8f4ee; box-shadow: -5px 0 0 #e8f4ee, 5px 0 0 #e8f4ee; color: #097040; }
+        .flatpickr-day.flatpickr-disabled, .flatpickr-day.flatpickr-disabled:hover { color: #cbd5e0; cursor: not-allowed; background: transparent; border-color: transparent; }
+        .flatpickr-day.prevMonthDay, .flatpickr-day.nextMonthDay { color: #cbd5e0; }
         /* ── Voordelen ───────────────────────────────── */
         #voordelen { background: #f0f7f2; padding: 80px 0; }
         .voordelen-grid {
@@ -154,11 +179,11 @@
         <div class="hero-checker">
             <div class="hero-checker__field">
                 <label for="hc_start">Incheckdatum</label>
-                <input type="date" id="hc_start">
+                <input type="text" id="hc_start" readonly placeholder="dd/mm/jjjj">
             </div>
             <div class="hero-checker__field">
                 <label for="hc_end">Uitcheckdatum</label>
-                <input type="date" id="hc_end">
+                <input type="text" id="hc_end" readonly placeholder="dd/mm/jjjj">
             </div>
             <button class="hero-checker__btn" id="hc_btn">Bekijk beschikbaarheid</button>
         </div>
@@ -344,6 +369,8 @@
 
 <div id="site-footer"></div>
 
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/nl.js"></script>
 <script src="assets/js/partials.js"></script>
 <script src="assets/js/main.js"></script>
 <script>
@@ -373,17 +400,21 @@
 
         if (!hcStart || !hcEnd || !hcBtn) return;
 
-        /* Min-datums instellen */
-        var today = new Date().toISOString().split('T')[0];
-        hcStart.setAttribute('min', today);
-        hcEnd.setAttribute('min', today);
-
-        hcStart.addEventListener('change', function () {
-            hcEnd.setAttribute('min', hcStart.value);
-            if (hcEnd.value && hcEnd.value < hcStart.value) hcEnd.value = hcStart.value;
-            hideResult();
+        /* flatpickr datumkiezer (dd/mm/jjjj weergave) */
+        var fpEnd = flatpickr(hcEnd, {
+            dateFormat: 'Y-m-d', altInput: true, altFormat: 'd/m/Y',
+            minDate: 'today', locale: 'nl',
+            onChange: function () { hideResult(); }
         });
-        hcEnd.addEventListener('change', hideResult);
+        var fpStart = flatpickr(hcStart, {
+            dateFormat: 'Y-m-d', altInput: true, altFormat: 'd/m/Y',
+            minDate: 'today', locale: 'nl',
+            onChange: function (sel, dateStr) {
+                fpEnd.set('minDate', dateStr);
+                if (fpEnd.selectedDates[0] && fpEnd.selectedDates[0] <= sel[0]) fpEnd.clear();
+                hideResult();
+            }
+        });
 
         hcBtn.addEventListener('click', function () {
             if (!hcStart.value || !hcEnd.value) {

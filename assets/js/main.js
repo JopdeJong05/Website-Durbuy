@@ -208,12 +208,17 @@
     const start = document.getElementById('start_date');
     const end = document.getElementById('end_date');
     if (start && end) {
-        const today = new Date().toISOString().split('T')[0];
-        start.setAttribute('min', today);
-        end.setAttribute('min', today);
-        start.addEventListener('change', () => {
-            end.setAttribute('min', start.value);
-            if (end.value && end.value < start.value) end.value = start.value;
+        const fpEnd = flatpickr(end, {
+            dateFormat: 'Y-m-d', altInput: true, altFormat: 'd/m/Y',
+            minDate: 'today', locale: 'nl'
+        });
+        flatpickr(start, {
+            dateFormat: 'Y-m-d', altInput: true, altFormat: 'd/m/Y',
+            minDate: 'today', locale: 'nl',
+            onChange: function (sel, dateStr) {
+                fpEnd.set('minDate', dateStr);
+                if (fpEnd.selectedDates[0] && fpEnd.selectedDates[0] <= sel[0]) fpEnd.clear();
+            }
         });
     }
 
