@@ -392,6 +392,7 @@
     /* ── Hero datumchecker met beschikbaarheidscheck ── */
     (function () {
         var CAL_ID  = 'boszichtdurbuy@gmail.com';
+        var API_KEY = 'AIzaSyCnnBdDpkvf_6aYYyBIjdX-ZMK0g48npxo';
 
         var hcStart  = document.getElementById('hc_start');
         var hcEnd    = document.getElementById('hc_end');
@@ -475,106 +476,21 @@
             hcResult.style.display = 'none';
         }
 
-        /* ICS-cache: voorkomt dubbele fetches binnen 2 minuten */
-        var _icsCache = null;
-        var _icsCacheTime = 0;
-
         function checkAvailability(startStr, endStr) {
-            return getIcs().then(function (icsText) {
-                if (!icsText) return null;
-                return !hasOverlap(icsText, new Date(startStr), new Date(endStr));
-            });
-        }
-
-        /* Haalt ICS op (uit cache of via de snelste proxy) */
-        function getIcs() {
-            if (_icsCache && Date.now() - _icsCacheTime < 120000) {
-                return Promise.resolve(_icsCache);
-            }
-            var icsUrl = 'https://calendar.google.com/calendar/ical/' +
-                         encodeURIComponent(CAL_ID) + '/public/basic.ics';
-            var enc = encodeURIComponent(icsUrl);
-            return firstSuccess([
-                fetchIcsJson('https://api.allorigins.win/get?url=' + enc),
-                fetchIcsRaw('https://api.allorigins.win/raw?url=' + enc),
-                fetchIcsRaw('https://corsproxy.io/?' + enc),
-            ]).then(function (icsText) {
-                _icsCache = icsText;
-                _icsCacheTime = Date.now();
-                return icsText;
-            }).catch(function (err) {
-                console.warn('[Boszicht] Kalender niet bereikbaar:', err.message,
-                    '— Zorg dat de Google Agenda openbaar is ingesteld.');
-                return null;
-            });
-        }
-
-        /* Fetch via JSON-wrapper (allorigins /get) */
-        function fetchIcsJson(url) {
-            var ctrl  = new AbortController();
-            var timer = setTimeout(function () { ctrl.abort(); }, 8000);
-            return fetch(url, { signal: ctrl.signal })
+            var url = 'https://www.googleapis.com/calendar/v3/calendars/' +
+                      encodeURIComponent(CAL_ID) + '/events' +
+                      '?key=' + API_KEY +
+                      '&timeMin=' + new Date(startStr).toISOString() +
+                      '&timeMax=' + new Date(endStr).toISOString() +
+                      '&singleEvents=true&maxResults=1';
+            return fetch(url)
                 .then(function (res) {
-                    clearTimeout(timer);
                     if (!res.ok) throw new Error('HTTP ' + res.status);
                     return res.json();
                 })
                 .then(function (data) {
-                    var text = data && data.contents;
-                    if (!text || !text.includes('BEGIN:VCALENDAR')) throw new Error('Geen ICS');
-                    return text;
-                })
-                .catch(function (err) { clearTimeout(timer); throw err; });
-        }
-
-        /* Fetch via raw-proxy */
-        function fetchIcsRaw(url) {
-            var ctrl  = new AbortController();
-            var timer = setTimeout(function () { ctrl.abort(); }, 8000);
-            return fetch(url, { signal: ctrl.signal })
-                .then(function (res) {
-                    clearTimeout(timer);
-                    if (!res.ok) throw new Error('HTTP ' + res.status);
-                    return res.text();
-                })
-                .then(function (text) {
-                    if (!text || !text.includes('BEGIN:VCALENDAR')) throw new Error('Geen ICS');
-                    return text;
-                })
-                .catch(function (err) { clearTimeout(timer); throw err; });
-        }
-
-        /* Geeft de eerste promise die resolve (negeert rejects totdat alles faalt) */
-        function firstSuccess(promises) {
-            return new Promise(function (resolve, reject) {
-                var left = promises.length;
-                if (!left) { reject(new Error('Geen proxies')); return; }
-                promises.forEach(function (p) {
-                    p.then(resolve).catch(function () {
-                        if (--left === 0) reject(new Error('Alle proxies mislukt'));
-                    });
+                    return data.items.length === 0;
                 });
-            });
-        }
-
-        /* Parst VEVENT-blokken en detecteert overlap met de gevraagde periode */
-        function hasOverlap(icsText, checkIn, checkOut) {
-            var blocks = icsText.split('BEGIN:VEVENT');
-            blocks.shift();
-            for (var i = 0; i < blocks.length; i++) {
-                var block = blocks[i];
-                var dsm = block.match(/DTSTART(?:;[^:\r\n]*)?:(\d{8})/);
-                var dem = block.match(/DTEND(?:;[^:\r\n]*)?:(\d{8})/);
-                if (!dsm || !dem) continue;
-                var evtStart = icsToDate(dsm[1]);
-                var evtEnd   = icsToDate(dem[1]);
-                if (evtStart < checkOut && evtEnd > checkIn) return true;
-            }
-            return false;
-        }
-
-        function icsToDate(s) {
-            return new Date(s.substr(0, 4) + '-' + s.substr(4, 2) + '-' + s.substr(6, 2));
         }
     }());
 </script>

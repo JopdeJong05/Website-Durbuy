@@ -290,7 +290,8 @@
 
     /* ── Pagina-datumchecker ─────────────────────────── */
     (function () {
-        var CAL_ID = 'boszichtdurbuy@gmail.com';
+        var CAL_ID  = 'boszichtdurbuy@gmail.com';
+        var API_KEY = 'AIzaSyCnnBdDpkvf_6aYYyBIjdX-ZMK0g48npxo';
         var pcStart  = document.getElementById('pc_start');
         var pcEnd    = document.getElementById('pc_end');
         var pcBtn    = document.getElementById('pc_btn');
@@ -357,44 +358,22 @@
         }
 
         /* ── ICS-checker (gedeelde cache met homepage) ── */
-        var _cache = null, _cacheT = 0;
         function checkAvail(s, e) {
-            return getIcs().then(function (ics) {
-                if (!ics) return null;
-                return !hasOverlap(ics, new Date(s), new Date(e));
-            });
+            var url = 'https://www.googleapis.com/calendar/v3/calendars/' +
+                      encodeURIComponent(CAL_ID) + '/events' +
+                      '?key=' + API_KEY +
+                      '&timeMin=' + new Date(s).toISOString() +
+                      '&timeMax=' + new Date(e).toISOString() +
+                      '&singleEvents=true&maxResults=1';
+            return fetch(url)
+                .then(function (r) {
+                    if (!r.ok) throw new Error('HTTP ' + r.status);
+                    return r.json();
+                })
+                .then(function (data) {
+                    return data.items.length === 0;
+                });
         }
-        function getIcs() {
-            if (_cache && Date.now() - _cacheT < 120000) return Promise.resolve(_cache);
-            var url = 'https://calendar.google.com/calendar/ical/' + encodeURIComponent(CAL_ID) + '/public/basic.ics';
-            var proxies = ['https://api.allorigins.win/raw?url=', 'https://corsproxy.io/?url='];
-            return firstOk(proxies.map(function (p) { return fetchIcs(p + encodeURIComponent(url)); }))
-                .then(function (t) { _cache = t; _cacheT = Date.now(); return t; })
-                .catch(function () { return null; });
-        }
-        function fetchIcs(url) {
-            var ctrl = new AbortController();
-            var tmr  = setTimeout(function () { ctrl.abort(); }, 5000);
-            return fetch(url, { signal: ctrl.signal })
-                .then(function (r) { clearTimeout(tmr); if (!r.ok) throw 0; return r.text(); })
-                .then(function (t) { if (!t.includes('BEGIN:VCALENDAR')) throw 0; return t; })
-                .catch(function (e) { clearTimeout(tmr); throw e; });
-        }
-        function firstOk(ps) {
-            return new Promise(function (res, rej) {
-                var left = ps.length;
-                ps.forEach(function (p) { p.then(res).catch(function () { if (!--left) rej(); }); });
-            });
-        }
-        function hasOverlap(ics, ci, co) {
-            return ics.split('BEGIN:VEVENT').slice(1).some(function (b) {
-                var ds = b.match(/DTSTART(?:;[^:\r\n]*)?:(\d{8})/);
-                var de = b.match(/DTEND(?:;[^:\r\n]*)?:(\d{8})/);
-                if (!ds || !de) return false;
-                return toD(ds[1]) < co && toD(de[1]) > ci;
-            });
-        }
-        function toD(s) { return new Date(s.substr(0,4)+'-'+s.substr(4,2)+'-'+s.substr(6,2)); }
     }());
 </script>
 <script src="assets/js/partials.js"></script>
