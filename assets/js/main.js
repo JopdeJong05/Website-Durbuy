@@ -210,11 +210,13 @@
     if (start && end) {
         const fpEnd = flatpickr(end, {
             dateFormat: 'Y-m-d', altInput: true, altFormat: 'd/m/Y',
-            minDate: 'today', locale: 'nl'
+            minDate: 'today', locale: 'nl',
+            onReady: function (sel, dateStr, fp) { fp.altInput.placeholder = 'dd/mm/jjjj'; }
         });
         flatpickr(start, {
             dateFormat: 'Y-m-d', altInput: true, altFormat: 'd/m/Y',
             minDate: 'today', locale: 'nl',
+            onReady: function (sel, dateStr, fp) { fp.altInput.placeholder = 'dd/mm/jjjj'; },
             onChange: function (sel, dateStr) {
                 fpEnd.set('minDate', dateStr);
                 if (fpEnd.selectedDates[0] && fpEnd.selectedDates[0] <= sel[0]) fpEnd.clear();

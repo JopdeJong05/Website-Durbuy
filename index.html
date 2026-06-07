@@ -161,7 +161,7 @@
         @media (max-width: 767px) {
             #voordelen, #faq, #beoordelingen { padding: 50px 0; }
             .hero-checker { padding: 18px 16px; gap: 12px; }
-            .hero-checker__field { min-width: calc(50% - 8px); }
+            .hero-checker__field { min-width: 100%; }
             .hero-checker__btn { width: 100%; text-align: center; }
         }
     </style>
@@ -405,11 +405,13 @@
         var fpEnd = flatpickr(hcEnd, {
             dateFormat: 'Y-m-d', altInput: true, altFormat: 'd/m/Y',
             minDate: 'today', locale: 'nl',
+            onReady: function (sel, dateStr, fp) { fp.altInput.placeholder = 'dd/mm/jjjj'; },
             onChange: function () { hideResult(); }
         });
         var fpStart = flatpickr(hcStart, {
             dateFormat: 'Y-m-d', altInput: true, altFormat: 'd/m/Y',
             minDate: 'today', locale: 'nl',
+            onReady: function (sel, dateStr, fp) { fp.altInput.placeholder = 'dd/mm/jjjj'; },
             onChange: function (sel, dateStr) {
                 fpEnd.set('minDate', dateStr);
                 if (fpEnd.selectedDates[0] && fpEnd.selectedDates[0] <= sel[0]) fpEnd.clear();
