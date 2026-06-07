@@ -413,6 +413,7 @@
             onChange: function (sel, dateStr) {
                 fpEnd.set('minDate', dateStr);
                 if (fpEnd.selectedDates[0] && fpEnd.selectedDates[0] <= sel[0]) fpEnd.clear();
+                fpEnd.jumpToDate(sel[0]);
                 hideResult();
             }
         });

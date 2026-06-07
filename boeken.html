@@ -310,6 +310,7 @@
             onChange: function (sel, dateStr) {
                 fpPcEnd.set('minDate', dateStr);
                 if (fpPcEnd.selectedDates[0] && fpPcEnd.selectedDates[0] <= sel[0]) fpPcEnd.clear();
+                fpPcEnd.jumpToDate(sel[0]);
                 pcResult.style.display = 'none';
             }
         });
