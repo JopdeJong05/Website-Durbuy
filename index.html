@@ -493,14 +493,12 @@
             }
             var icsUrl = 'https://calendar.google.com/calendar/ical/' +
                          encodeURIComponent(CAL_ID) + '/public/basic.ics';
-            var proxies = [
-                'https://api.allorigins.win/raw?url=',
-                'https://corsproxy.io/?url=',
-            ];
-            /* Beide proxies tegelijk — neem de snelste geldige respons */
-            return firstSuccess(proxies.map(function (p) {
-                return fetchIcs(p + encodeURIComponent(icsUrl));
-            })).then(function (icsText) {
+            var enc = encodeURIComponent(icsUrl);
+            return firstSuccess([
+                fetchIcsJson('https://api.allorigins.win/get?url=' + enc),
+                fetchIcsRaw('https://api.allorigins.win/raw?url=' + enc),
+                fetchIcsRaw('https://corsproxy.io/?' + enc),
+            ]).then(function (icsText) {
                 _icsCache = icsText;
                 _icsCacheTime = Date.now();
                 return icsText;
@@ -511,10 +509,28 @@
             });
         }
 
-        /* Fetch één proxy, timeout 5 s */
-        function fetchIcs(url) {
+        /* Fetch via JSON-wrapper (allorigins /get) */
+        function fetchIcsJson(url) {
             var ctrl  = new AbortController();
-            var timer = setTimeout(function () { ctrl.abort(); }, 5000);
+            var timer = setTimeout(function () { ctrl.abort(); }, 8000);
+            return fetch(url, { signal: ctrl.signal })
+                .then(function (res) {
+                    clearTimeout(timer);
+                    if (!res.ok) throw new Error('HTTP ' + res.status);
+                    return res.json();
+                })
+                .then(function (data) {
+                    var text = data && data.contents;
+                    if (!text || !text.includes('BEGIN:VCALENDAR')) throw new Error('Geen ICS');
+                    return text;
+                })
+                .catch(function (err) { clearTimeout(timer); throw err; });
+        }
+
+        /* Fetch via raw-proxy */
+        function fetchIcsRaw(url) {
+            var ctrl  = new AbortController();
+            var timer = setTimeout(function () { ctrl.abort(); }, 8000);
             return fetch(url, { signal: ctrl.signal })
                 .then(function (res) {
                     clearTimeout(timer);
