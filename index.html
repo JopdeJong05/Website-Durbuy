@@ -1,357 +1,535 @@
 <!doctype html>
-<html class="no-js" lang="nl">
+<html lang="nl">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Boszicht Durbuy</title>
-    <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Rufina:400,700" rel="stylesheet">
-    <link rel="shortcut icon" type="image/icon" href="assets/logo/icon.png" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/css/linearicons.css">
-    <link rel="stylesheet" href="assets/css/flaticon.css">
-    <link rel="stylesheet" href="assets/css/animate.css">
-    <link rel="stylesheet" href="assets/css/bootsnav.css">
-    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
+    <title>Boszicht Durbuy — Privé chalet in de Ardennen</title>
+    <meta name="description" content="Privé vakantiehuisje 'Boszicht' in de bossen van Durbuy. Rust, natuur en comfort voor 2 tot 6 personen. Zwembad, brasserie en activiteiten in de buurt.">
+
+    <link rel="shortcut icon" type="image/png" href="assets/logo/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Rufina:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+
     <style>
-        .carousel-wrapper{max-width:1200px;margin:0 auto;padding:0 10px}
-        .owl-carousel .item{padding:0 5px}
-        .inner{transition:transform .4s ease,box-shadow .4s ease}
-        .inner img{width:100%;height:100%;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,.15);display:block}
-        .owl-carousel .center .inner img{box-shadow:0 10px 25px rgba(0,0,0,.35)}
-        .owl-nav{display:flex;justify-content:center;margin-top:20px;gap:20px}
-        .owl-nav button.owl-prev,.owl-nav button.owl-next{background:#097040;color:#fff;border:none;padding:12px 16px;font-size:20px;border-radius:50%;cursor:pointer;transition:background-color .3s}
-        .owl-nav button.owl-prev:hover,.owl-nav button.owl-next:hover{background:#203f30}
-        .owl-nav button span{display:none}
-        .owl-nav button.owl-prev::after{content:"←"}
-        .owl-nav button.owl-next::after{content:"→"}
-        @media(max-width:599px){.inner img{max-width:90vw;margin:0 auto}}
+        /* ── Voordelen ───────────────────────────────── */
+        #voordelen { background: #f0f7f2; padding: 80px 0; }
+        .voordelen-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 28px; margin-top: 48px;
+        }
+        .voordeel-item {
+            background: white; border-radius: 10px; padding: 28px 20px; text-align: center;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.07); transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .voordeel-item:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+        .voordeel-item .icoon { font-size: 36px; margin-bottom: 12px; display: block; }
+        .voordeel-item h4 { font-size: 15px; font-weight: 700; color: #2c3e50; margin-bottom: 8px; font-family: 'Poppins', sans-serif; }
+        .voordeel-item p { font-size: 13px; color: #888; line-height: 1.6; }
 
-        #contact-form{background:#fff;padding:30px;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.1);width:100%}
-        #contact-form h2{text-align:center;color:#2c3e50;margin-bottom:20px}
-        #contact-form label{font-weight:700;color:#2c3e50;margin-bottom:5px;display:block}
-        #contact-form input[type=text],#contact-form input[type=email],#contact-form input[type=date],#contact-form textarea{width:100%;padding:10px;margin-bottom:15px;border:1px solid #ccc;border-radius:4px;box-sizing:border-box;font-family:'Poppins',sans-serif;font-size:15px}
-        #contact-form textarea{resize:vertical;min-height:100px}
-        .date-group{display:flex;gap:20px;flex-wrap:wrap}
-        .date-field{flex:1;min-width:200px}
-        #contact-form input[type=submit]{background:#097040;color:#fff;border:none;padding:12px;border-radius:4px;cursor:pointer;width:100%;font-size:16px;font-family:'Poppins',sans-serif;transition:background .3s}
-        #contact-form input[type=submit]:hover{background:#203f30}
-        #contact-form input[type=submit]:disabled{background:#aaa;cursor:not-allowed}
+        /* ── Beoordelingen ───────────────────────────── */
+        #beoordelingen { padding: 80px 0; background: var(--green-50); }
+        .beoordeling-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px; margin-top: 48px;
+        }
+        .beoordeling-item {
+            background: white; padding: 28px; border-radius: 10px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.07); border: 1px solid #f0f0f0;
+            display: flex; flex-direction: column;
+        }
+        .beoordeling-sterren { color: #f59e0b; font-size: 18px; letter-spacing: 2px; margin-bottom: 14px; }
+        .beoordeling-tekst { color: #666; font-style: italic; line-height: 1.8; flex-grow: 1; margin-bottom: 18px; font-size: 15px; }
+        .beoordeling-naam { font-weight: 700; color: #2c3e50; font-size: 14px; font-family: 'Poppins', sans-serif; }
+        .beoordeling-bron { color: #aaa; font-size: 13px; }
 
-        #confirmation{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);justify-content:center;align-items:center;z-index:9999}
-        .confirmation-box{background:#fff;padding:40px 30px 30px;border-radius:12px;text-align:center;max-width:420px;width:90%;box-shadow:0 8px 32px rgba(0,0,0,.25);position:relative;animation:popIn .3s cubic-bezier(.34,1.56,.64,1)}
-        @keyframes popIn{from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1}}
-        .conf-icon{font-size:52px;display:block;margin-bottom:12px}
-        .confirmation-box h3{color:#097040;font-size:22px;margin:0 0 8px}
-        .confirmation-box p{color:#555;margin:0 0 22px;line-height:1.6}
-        .conf-close-x{position:absolute;top:10px;right:14px;background:none;border:none;font-size:24px;color:#bbb;cursor:pointer;line-height:1}
-        .conf-close-x:hover{color:#555}
-        .conf-close-btn{background:#097040;color:#fff;border:none;padding:10px 28px;border-radius:6px;cursor:pointer;font-size:15px;font-family:'Poppins',sans-serif;transition:background .3s}
-        .conf-close-btn:hover{background:#203f30}
+        /* ── FAQ ─────────────────────────────────────── */
+        #faq { padding: 80px 0; background: #fff; }
+        .faq-list { max-width: 720px; margin: 48px auto 0; }
+        .faq-item { border: 1px solid #e8e8e8; border-radius: 8px; margin-bottom: 12px; overflow: hidden; }
+        .faq-vraag {
+            padding: 18px 24px; cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; background: #fff; font-weight: 600; font-size: 15px; color: #2c3e50;
+            transition: background 0.2s; border: none; width: 100%; text-align: left;
+            font-family: 'Poppins', sans-serif;
+        }
+        .faq-vraag:hover { background: #f5fbf7; }
+        .faq-vraag .faq-icon { font-size: 20px; color: #097040; transition: transform 0.3s; flex-shrink: 0; margin-left: 12px; }
+        .faq-vraag.open .faq-icon { transform: rotate(45deg); }
+        .faq-antwoord {
+            max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease;
+            padding: 0 24px; font-size: 14px; color: #666; line-height: 1.8;
+        }
+        .faq-antwoord.open { max-height: 300px; padding: 14px 24px 20px; }
 
-        .agenda-row{margin-top:30px}
-        .prijzen-col{padding-left:15px;padding-right:15px}
-        .prijzen-vak{background:#f9f9f9;padding:20px;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.1);max-width:500px;width:100%;margin:0 auto}
-        .prijzen-vak h3{text-align:center;font-weight:700;margin-bottom:15px;color:#333}
-        .prijzen-vak table{width:100%;margin-bottom:20px;border-collapse:collapse}
-        .prijzen-vak th,.prijzen-vak td{padding:10px 12px;border:1px solid #ddd;text-align:left}
-        .prijzen-vak th{background:#eee;color:#097040;font-weight:600}
-        .prijzen-nota{max-width:500px;margin:15px auto 0;background:#d9edf7;border:1px solid #b8d4e8;color:#31708f;padding:14px 16px;border-radius:6px;font-size:14px;line-height:1.7}
-        .prijzen-nota strong{font-weight:600}
+        /* ── Hero datumchecker ───────────────────────── */
+        .hero-checker {
+            margin-top: 40px;
+            background: rgba(255,255,255,0.14);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 14px;
+            padding: 22px 26px;
+            display: flex;
+            align-items: flex-end;
+            gap: 16px;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.9s forwards;
+            text-align: left;
+        }
+        .hero-checker__field {
+            display: flex; flex-direction: column; gap: 6px;
+            flex: 1; min-width: 155px;
+        }
+        .hero-checker__field label {
+            font-size: 11px; font-weight: 700; letter-spacing: 1.8px;
+            text-transform: uppercase; color: rgba(255,255,255,0.75);
+        }
+        .hero-checker__field input {
+            background: rgba(255,255,255,0.93);
+            border: none; border-radius: 8px;
+            color: #2c3e50; font-family: var(--font-sans);
+            font-size: 15px; font-weight: 500;
+            padding: 12px 14px; outline: none; cursor: pointer; width: 100%;
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+        .hero-checker__field input:focus {
+            background: #fff;
+            box-shadow: 0 0 0 2px var(--green-700);
+        }
+        .hero-checker__btn {
+            background: var(--green-700); color: #fff; border: none;
+            border-radius: 8px; padding: 12px 26px;
+            font-family: var(--font-sans); font-size: 15px; font-weight: 600;
+            cursor: pointer; white-space: nowrap; flex-shrink: 0;
+            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+        }
+        .hero-checker__btn:hover {
+            background: var(--green-600);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 18px rgba(9,112,64,0.45);
+        }
+        .hero-checker__btn:disabled { opacity: 0.7; cursor: wait; transform: none; box-shadow: none; }
 
-        #agenda iframe{border:none;box-shadow:0 4px 10px rgba(0,0,0,.3);border-radius:10px;margin-top:5%;width:100%;height:350px;transition:box-shadow .3s}
-        #agenda iframe:hover{box-shadow:0 16px 25px rgba(0,0,0,.4)}
+        /* Resultaatbalk */
+        .hero-result {
+            margin-top: 14px; border-radius: 10px; padding: 14px 20px;
+            display: flex; align-items: center; gap: 12px;
+            font-size: 15px; font-weight: 500;
+            animation: fadeUp 0.4s ease; text-align: left;
+            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+        }
+        .hero-result--available   { background: rgba(16,185,129,0.88); color: #fff; }
+        .hero-result--unavailable { background: rgba(239,68,68,0.88);  color: #fff; }
+        .hero-result--warning     { background: rgba(245,158,11,0.88); color: #fff; }
+        .hero-result__icon  { font-size: 20px; flex-shrink: 0; }
+        .hero-result__text  { flex-grow: 1; line-height: 1.4; }
+        .hero-result__link  {
+            color: #fff; font-weight: 700; text-decoration: underline;
+            white-space: nowrap; flex-shrink: 0;
+        }
+        .hero-result__link:hover { color: rgba(255,255,255,0.82); }
 
-        @media screen and (max-width:991px){.prijzen-col{margin-top:30px}}
-        @media screen and (max-width:767px){.prijzen-vak{margin:20px auto 0}.agenda-row .col-md-6{width:100%}}
+        @media (max-width: 767px) {
+            #voordelen, #faq, #beoordelingen { padding: 50px 0; }
+            .hero-checker { padding: 18px 16px; gap: 12px; }
+            .hero-checker__field { min-width: calc(50% - 8px); }
+            .hero-checker__btn { width: 100%; text-align: center; }
+        }
     </style>
 </head>
 <body>
 
-<div id="confirmation">
-    <div class="confirmation-box">
-        <button class="conf-close-x" id="conf-x" aria-label="Sluiten">&#215;</button>
-        <span class="conf-icon">&#9989;</span>
-        <h3>Aanvraag verzonden!</h3>
-        <p>Uw aanvraag is goed ontvangen.<br>We nemen zo snel mogelijk contact met u op!</p>
-        <button class="conf-close-btn" id="conf-btn">Sluiten</button>
-    </div>
-</div>
+<div id="site-header"></div>
 
-<section id="home" class="welcome-hero">
-    <div class="top-area">
-        <div class="header-area">
-            <nav class="navbar navbar-default bootsnav navbar-sticky navbar-scrollspy"
-                 data-minus-value-desktop="70" data-minus-value-mobile="55" data-speed="1000">
-                <div class="container">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
-                            <i class="fa fa-bars"></i>
-                        </button>
-                        <a class="navbar-brand" href="index.html">Boszicht<span></span></a>
-                    </div>
-                    <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
-                        <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-                            <li class="scroll active"><a href="#home">Home</a></li>
-                            <li class="scroll"><a href="#accommodatie">Accommodatie</a></li>
-                            <li class="scroll"><a href="#park">Park</a></li>
-                            <li class="scroll"><a href="#agenda">Agenda</a></li>
-                            <li class="scroll"><a href="#contact">Contact</a></li>
-                        </ul>
-                    </div>
+<!-- ── HERO ────────────────────────────────────────────── -->
+<section class="hero">
+    <div class="hero__content">
+        <h1>Boszicht</h1>
+        <p class="hero__tagline">Jouw privé chalet midden in de bossen van Durbuy — natuur, rust en comfort op één plek.</p>
+
+        <div class="hero-checker">
+            <div class="hero-checker__field">
+                <label for="hc_start">Incheckdatum</label>
+                <input type="date" id="hc_start">
+            </div>
+            <div class="hero-checker__field">
+                <label for="hc_end">Uitcheckdatum</label>
+                <input type="date" id="hc_end">
+            </div>
+            <button class="hero-checker__btn" id="hc_btn">Bekijk beschikbaarheid</button>
+        </div>
+        <div class="hero-result" id="hc_result" style="display:none;"></div>
+    </div>
+    <div class="hero__scroll-hint">Scroll</div>
+</section>
+
+<!-- ── VOORDELEN (V4) ──────────────────────────────────── -->
+<section id="voordelen">
+    <div class="container">
+        <div class="section-header reveal">
+            <span class="eyebrow">Welkom</span>
+            <h2>Waarom Boszicht?</h2>
+            <p>Een vakantie midden in de natuur, op slechts 3 km van het centrum van Durbuy.</p>
+        </div>
+        <div class="voordelen-grid reveal">
+            <div class="voordeel-item">
+                <span class="icoon">🌲</span>
+                <h4>Midden in het bos</h4>
+                <p>Omringd door natuur, op fietsafstand van het gezellige Durbuy.</p>
+            </div>
+            <div class="voordeel-item">
+                <span class="icoon">🏠</span>
+                <h4>Privé chalet</h4>
+                <p>Uw eigen ruimte voor 5 personen</p>
+            </div>
+            <div class="voordeel-item">
+                <span class="icoon">🏊</span>
+                <h4>Verwarmd zwembad</h4>
+                <p>Toegang tot het overdekte zwembad van het Sunclass park.</p>
+            </div>
+            <div class="voordeel-item">
+                <span class="icoon">🚴</span>
+                <h4>Activiteiten</h4>
+                <p>Wandelen, fietsen, kajakken, golfen en Adventure Valley vlakbij.</p>
+            </div>
+            <div class="voordeel-item">
+                <span class="icoon">✨</span>
+                <h4>Inbegrepen</h4>
+                <p>Schoonmaak, lakensets en parkkosten zijn altijd inbegrepen in de prijs.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── ACCOMMODATIE TEASER ─────────────────────────────── -->
+<section class="section section--alt">
+    <div class="container">
+        <div class="split reveal">
+            <div class="split__media">
+                <img src="assets/images/selectie/buiten 2.jpg" alt="Het chalet van buiten" loading="lazy">
+            </div>
+            <div class="split__content">
+                <span class="eyebrow" style="color:var(--green-700);font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;display:inline-block;margin-bottom:14px;">De Accommodatie</span>
+                <h3>Comfortabel verblijf in de bossen</h3>
+                <p>Welkom in Boszicht — een sfeervol vakantiehuisje midden in de natuur. Met meerdere slaapkamers, een woonkamer, volledig uitgeruste keuken en een eigen terras vindt u alles om met familie of vrienden te ontspannen.</p>
+                <ul class="split__list">
+                    <li>Geschikt voor 5 personen</li>
+                    <li>Volledig ingerichte keuken en woonkamer</li>
+                    <li>Eigen terras midden in het bos</li>
+                    <li>Gratis WiFi en parkeerplaats</li>
+                </ul>
+                <a href="accommodatie.html" class="btn btn--primary" style="margin-top:28px;">Bekijk de accommodatie</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── HET PARK ────────────────────────────────────────── -->
+<section class="section">
+    <div class="container">
+        <div class="section-header reveal">
+            <span class="eyebrow">Het Park</span>
+            <h2>Faciliteiten van Sunclass</h2>
+            <p>Als gast van Boszicht geniet u van alle faciliteiten van het Sunclass park.</p>
+        </div>
+        <div class="card-grid reveal" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));">
+            <div class="feature-card" style="padding:0;overflow:hidden;">
+                <img src="assets/images/park/zwembad.jpg" alt="Zwembad" style="width:100%;height:200px;object-fit:cover;" loading="lazy">
+                <div style="padding:24px;">
+                    <h4 style="font-family:'Poppins',sans-serif;font-size:16px;font-weight:700;color:#2c3e50;margin-bottom:8px;">Verwarmd Zwembad</h4>
+                    <p>Overdekt zwembad. Open elke dag van 10:00–17:00 u, vrijdag tot 21:00 u.</p>
                 </div>
-            </nav>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-    <div class="container">
-        <div class="welcome-hero-txt">
-            <h2>Boszicht</h2>
-            <p>"Beleef natuur en rust,<br>jouw chalet midden in de bossen van Durbuy"</p>
-            <button class="welcome-btn" onclick="scrollToSection('agenda')">Bekijk Beschikbaarheid</button>
-        </div>
-    </div>
-</section>
-
-<section id="accommodatie" class="accommodatie-section">
-    <div class="container">
-        <div class="section-header" style="margin-top:5%"><h2>De Accommodatie</h2></div>
-        <div style="margin-top:1%;text-align:center;margin-bottom:50px">
-            <p>Welkom bij Vakantiehuisje 'Boszicht'! Gelegen tussen de boomtoppen en aan de rand van een berg, slechts 3,5 km van het centrum van Durbuy. Geniet hier van rust, natuur en volop activiteiten: wandelen, fietsen, vissen, kajakken en golfen. Ontdek de serene omgeving en avontuurlijke opties, zoals Adventure Valley. Dit is de ideale plek voor een ontspannen én actieve vakantie!<br>Boek nu uw verblijf en beleef een onvergetelijke tijd in Boszicht.</p>
-            <!--<button class="welcome-btn" style="margin-top:20px" onclick="window.location.href='accommodatie.html'">Meer informatie</button>-->
-        </div>
-        <div class="carousel-wrapper">
-            <div class="owl-carousel owl-theme accommodatie-carousel">
-                <div class="item"><div class="inner"><a href="assets/images/selectie/1.jpg" data-lightbox="galerij"><img src="assets/images/selectie/1.jpg" alt="Exterieur"></a></div></div>
-                <div class="item"><div class="inner"><a href="assets/images/selectie/2.jpg" data-lightbox="galerij"><img src="assets/images/selectie/2.jpg" alt="Woonkamer"></a></div></div>
-                <div class="item"><div class="inner"><a href="assets/images/selectie/3.jpg" data-lightbox="galerij"><img src="assets/images/selectie/3.jpg" alt="Keuken"></a></div></div>
-                <div class="item"><div class="inner"><a href="assets/images/selectie/4.jpg" data-lightbox="galerij"><img src="assets/images/selectie/4.jpg" alt="Badkamer"></a></div></div>
-                <div class="item"><div class="inner"><a href="assets/images/selectie/5.jpg" data-lightbox="galerij"><img src="assets/images/selectie/5.jpg" alt="Slaapkamer"></a></div></div>
-                <div class="item"><div class="inner"><a href="assets/images/selectie/6.jpg" data-lightbox="galerij"><img src="assets/images/selectie/cropped/6.png" alt="Terras"></a></div></div>
-                <div class="item"><div class="inner"><a href="assets/images/selectie/7.jpg" data-lightbox="galerij"><img src="assets/images/selectie/7.jpg" alt="Uitzicht"></a></div></div>
-                <div class="item"><div class="inner"><a href="assets/images/selectie/8.jpg" data-lightbox="galerij"><img src="assets/images/selectie/8.jpg" alt="Detail"></a></div></div>
-                <div class="item"><div class="inner"><a href="assets/images/selectie/9.jpg" data-lightbox="galerij"><img src="assets/images/selectie/9.jpg" alt="Eetruimte"></a></div></div>
-                <div class="item"><div class="inner"><a href="assets/images/selectie/10.jpg" data-lightbox="galerij"><img src="assets/images/selectie/10.jpg" alt="Tuin"></a></div></div>
-                <div class="item"><div class="inner"><a href="assets/images/selectie/11.jpg" data-lightbox="galerij"><img src="assets/images/selectie/11.jpg" alt="Slaapkamer 2"></a></div></div>
-                <div class="item"><div class="inner"><a href="assets/images/selectie/12.jpg" data-lightbox="galerij"><img src="assets/images/selectie/12.jpg" alt="Hal"></a></div></div>
-                <div class="item"><div class="inner"><a href="assets/images/selectie/13.jpg" data-lightbox="galerij"><img src="assets/images/selectie/cropped/13.png" alt="Omgeving"></a></div></div>
             </div>
-        </div>
-    </div>
-</section>
-
-<section id="park">
-    <div class="container">
-        <div class="section-header"><h2>Het Park</h2></div>
-        <div class="new-cars-content">
-            <div class="owl-carousel owl-theme" id="new-cars-carousel">
-
-                <div class="new-cars-item"><div class="single-new-cars-item"><div class="row">
-                    <div class="col-md-7 col-sm-12"><div class="new-cars-img"><img src="assets/images/foto's park/Brasserie.jpg" alt="Brasserie"></div></div>
-                    <div class="col-md-5 col-sm-12"><div class="new-cars-txt">
-                        <h2>De Brasserie</h2>
-                        <p>In de brasserie "La Brasserie du Parc Sunclass" bent u altijd van harte welkom voor een smakelijke maaltijd, een lichte snack of een verfrissend drankje. Terwijl de kinderen zich vermaken in de nabijgelegen speeltuin, kunnen ouders ontspannen op het ruime, zonnige terras.</p>
-                        <button class="welcome-btn new-cars-btn" onclick="window.open('https://brasseriesunclass.be/','_blank')">Website</button>
-                    </div></div>
-                </div></div></div>
-
-                <div class="new-cars-item"><div class="single-new-cars-item"><div class="row">
-                    <div class="col-md-7 col-sm-12"><div class="new-cars-img"><img src="assets/images/foto's park/Receptie.jpg" alt="Receptie"></div></div>
-                    <div class="col-md-5 col-sm-12"><div class="new-cars-txt">
-                        <h2>De Receptie</h2>
-                        <p>Bij aankomst en vertrek vragen wij u vriendelijk om langs de receptie te gaan. Uw bungalow is vanaf 15.00 uur beschikbaar. Als u na sluitingstijd aankomt, neem dan vooraf contact met ons op.</p>
-                    </div></div>
-                </div></div></div>
-
-                <div class="new-cars-item"><div class="single-new-cars-item"><div class="row">
-                    <div class="col-md-7 col-sm-12"><div class="new-cars-img"><img src="assets/images/foto's park/zwembad.jpg" alt="Zwembad"></div></div>
-                    <div class="col-md-5 col-sm-12"><div class="new-cars-txt">
-                        <h2>Het Zwembad</h2>
-                        <p>Er is een verwarmd indoor zwembad met rondom een zonneweide.<br><br><strong>Openingstijden (buiten vakanties):</strong> elke dag 10.00&ndash;17.00 uur, vrijdag tot 21.00 uur.<br><br>Uitsluitend toegankelijk voor Sunclass-leden en parkgasten.</p>
-                    </div></div>
-                </div></div></div>
-
-                <div class="new-cars-item"><div class="single-new-cars-item"><div class="row">
-                    <div class="col-md-7 col-sm-12"><div class="new-cars-img"><img src="assets/images/selectie/cropped/sport.png" alt="Sport"></div></div>
-                    <div class="col-md-5 col-sm-12"><div class="new-cars-txt">
-                        <h2>Sportfaciliteiten</h2>
-                        <p>Het park beschikt over: tennisveld, basketbalveld, voetbalveld, volleybalveld, pingpongtafels en een p&eacute;tanquebaan.<br><br>Langs de receptie is ook een fietswasplaats te vinden.</p>
-                    </div></div>
-                </div></div></div>
-
-                <div class="new-cars-item"><div class="single-new-cars-item"><div class="row">
-                    <div class="col-md-7 col-sm-12"><div class="new-cars-img"><img src="assets/images/selectie/cropped/klimrek.png" alt="Speeltuin"></div></div>
-                    <div class="col-md-5 col-sm-12"><div class="new-cars-txt">
-                        <h2>Speeltuin</h2>
-                        <p>Langs de receptie en brasserie is een speelgedeelte voor de kinderen, uitgerust met een schommel, glijbaan en klimrek.</p>
-                    </div></div>
-                </div></div></div>
-
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="agenda">
-    <div class="container" style="margin-bottom:10%">
-        <div class="section-header"><h2>Beschikbaarheid en Boeken</h2></div>
-        <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FBrussels&showPrint=0&showTitle=0&showCalendars=0&showTz=0&src=Ym9zemljaHRkdXJidXlAZ21haWwuY29t&color=%23039BE5" frameborder="0" scrolling="no" title="Beschikbaarheidskalender"></iframe>
-
-        <div class="row agenda-row">
-            <div class="col-md-6 col-sm-12">
-                <form id="contact-form">
-                    <h2 style="font-weight:bold">Boekingsformulier</h2>
-                    <p style="text-align:center;margin-bottom:4vh">Op bovenstaande agenda kan je zien welke periodes nog beschikbaar zijn. Nadat je een keuze hebt gemaakt, vul je dit hieronder in.</p>
-
-                    <label for="name">Naam:</label>
-                    <input type="text" id="name" name="name" required>
-
-                    <label for="email">E-mail:</label>
-                    <input type="email" id="email" name="email" required>
-
-                    <label for="phone">Telefoonnummer (optioneel):</label>
-                    <input type="text" id="phone" name="phone" >
-
-                    <div class="date-group">
-                        <div class="date-field">
-                            <label for="start_date">Begindatum:</label>
-                            <input type="date" id="start_date" name="start_date" required>
-                        </div>
-                        <div class="date-field">
-                            <label for="end_date">Einddatum:</label>
-                            <input type="date" id="end_date" name="end_date" required>
-                        </div>
-                    </div>
-
-                    <label for="message">Extra vragen? (optioneel):</label>
-                    <textarea id="message" name="message" placeholder="Uw vraag of opmerking..."></textarea>
-
-                    <input type="submit" id="submit-btn" value="Verstuur Aanvraag">
-                </form>
-            </div>
-
-            <div class="col-md-6 col-sm-12 prijzen-col">
-                <div class="prijzen-vak">
-                    <h3>Prijzen Buiten Vakantieperiodes</h3>
-                    <table>
-                        <tr><th>Periode</th><th>Prijs</th></tr>
-                        <tr><td>Week (7 nachten)</td><td>&euro; 850,-</td></tr>
-                        <tr><td>Midweek (4 nachten)</td><td>&euro; 600,-</td></tr>
-                        <tr><td>Weekend (2 nachten)</td><td>&euro; 430,-</td></tr>
-                    </table>
-                    <h3>Prijzen Vakantieperiodes (BE &amp; NL)</h3>
-                    <table>
-                        <tr><th>Periode</th><th>Prijs</th></tr>
-                        <tr><td>Week (7 nachten)</td><td>&euro; 1.395,-</td></tr>
-                        <tr><td>Midweek (4 nachten)</td><td>&euro; 895,-</td></tr>
-                    </table>
+            <div class="feature-card" style="padding:0;overflow:hidden;">
+                <img src="assets/images/park/brasserie.jpg" alt="Brasserie" style="width:100%;height:200px;object-fit:cover;" loading="lazy">
+                <div style="padding:24px;">
+                    <h4 style="font-family:'Poppins',sans-serif;font-size:16px;font-weight:700;color:#2c3e50;margin-bottom:8px;">La Brasserie du Parc</h4>
+                    <p>Maaltijden, drankjes en snacks op een gezellig terras vlak bij de speeltuin.</p>
                 </div>
-                <div class="prijzen-nota">
-                    <strong>Prijzen zijn inclusief</strong> schoonmaak, lakensets en parkkosten.<br>
-                    <strong>Exclusief</strong> toeristenbelasting: &euro; 1,- per persoon per nacht.
+            </div>
+            <div class="feature-card" style="padding:0;overflow:hidden;">
+                <img src="assets/images/park/tennis.jpg" alt="Sportfaciliteiten" style="width:100%;height:200px;object-fit:cover;" loading="lazy">
+                <div style="padding:24px;">
+                    <h4 style="font-family:'Poppins',sans-serif;font-size:16px;font-weight:700;color:#2c3e50;margin-bottom:8px;">Sport & Spel</h4>
+                    <p>Tennis, basket, voetbal, volleybal, pingpong en pétanque — voor jong en oud.</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<footer id="contact" class="contact">
+<!-- ── BEOORDELINGEN ────────────────────────────────────── -->
+<section id="beoordelingen">
     <div class="container">
-        <div class="footer-top">
-            <div class="row">
-                <div class="col-md-3 col-sm-6">
-                    <div class="single-footer-widget">
-                        <div class="footer-logo"><a href="index.html">Boszicht</a></div>
-                        <div class="footer-contact">
-                            <a style="color:white;font-family:Poppins;font-size:medium;text-transform:none" href="mailto:boszichtdurbuy@gmail.com">Boszichtdurbuy@gmail.com</a>
-                            <a style="color:white;font-family:Poppins;font-size:medium;text-transform:none" href="tel:+32468002549">+32 468 00 25 49</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="section-header reveal">
+            <span class="eyebrow">Wat gasten zeggen</span>
+            <h2>Beoordelingen</h2>
         </div>
-        <div class="footer-copyright"><div class="row"><div class="col-sm-6"></div></div></div>
-        <div id="scroll-Top">
-            <div class="return-to-top">
-                <i class="fa fa-angle-up" id="scroll-top" data-toggle="tooltip" data-placement="top" title="Terug naar boven" aria-hidden="true"></i>
+        <div class="beoordeling-grid reveal">
+            <div class="beoordeling-item">
+                <div class="beoordeling-sterren">★★★★★</div>
+                <p class="beoordeling-tekst">"Toplocatie vlak bij Durbuy! De bedden waren heerlijk, de keuken volledig uitgerust en de communicatie met de host verliep vlot. Fijn pluspunt: oplaadpalen voor elektrische auto’s op het park."</p>
+                <div class="beoordeling-naam">Maarten</div>
+                <div class="beoordeling-bron">Geverifieerde beoordeling</div>
+            </div>
+            <div class="beoordeling-item">
+                <div class="beoordeling-sterren">★★★★★</div>
+                <p class="beoordeling-tekst">"Prachtig ingerichte chalet op een topligging in de bossen en op wandelafstand van Durbuy. Gezellig gedecoreerd in kerstsfeer wat de beleving compleet maakte! Voorzien van alle comfort en al wat we nodig hadden voor een kort verblijf.>"</p>
+                <div class="beoordeling-naam">Michel</div>
+                <div class="beoordeling-bron">Geverifieerde beoordeling</div>
+            </div>
+            <div class="beoordeling-item">
+                <div class="beoordeling-sterren">★★★★★</div>
+                <p class="beoordeling-tekst">"Heel gezellig ingericht , zeer proper ! Aangenaam contact met de eigenaar"</p>
+                <div class="beoordeling-naam">Evelien</div>
+                <div class="beoordeling-bron">Geverifieerde beoordeling</div>
             </div>
         </div>
     </div>
-</footer>
+</section>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<!-- ── FAQ (V4) ────────────────────────────────────────── -->
+<section id="faq">
+    <div class="container">
+        <div class="section-header reveal">
+            <h2>Veelgestelde Vragen</h2>
+        </div>
+        <div class="faq-list reveal">
+            <div class="faq-item">
+                <button class="faq-vraag">Hoeveel personen kunnen er verblijven? <span class="faq-icon">+</span></button>
+                <div class="faq-antwoord">Het chalet biedt slaapruimte voor <strong>5 personen</strong>, verdeeld over 2 slaapkamers en een extra bed op de overloop.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-vraag">Zijn lakens en handdoeken inbegrepen? <span class="faq-icon">+</span></button>
+                <div class="faq-antwoord">Ja. <strong>Lakensets en schoonmaak zijn altijd inbegrepen</strong> in de prijs. Handdoeken (ook keukenhanddoeken) kunt u meenemen of ter plaatse regelen.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-vraag">Hoe ver is het van het centrum van Durbuy? <span class="faq-icon">+</span></button>
+                <div class="faq-antwoord">Het chalet ligt op slechts <strong>3 km</strong> van het gezellige centrum van Durbuy.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-vraag">Wanneer kan ik inchecken en uitchecken? <span class="faq-icon">+</span></button>
+                <div class="faq-antwoord">Inchecken kan <strong>vanaf 15.00 uur</strong>. Uitchecken dient te gebeuren voor <strong>10.00 uur</strong>. Bij aankomst na sluitingstijd van de receptie neemt u best vooraf contact met ons op.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-vraag">Is er toegang tot het zwembad? <span class="faq-icon">+</span></button>
+                <div class="faq-antwoord">Ja, als gast van Boszicht heeft u <strong>toegang tot het overdekte verwarmde zwembad</strong> van het Sunclass park. Buiten vakanties is het open van 10.00–17.00 u (vrijdag tot 21.00 u).</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-vraag">Zijn huisdieren toegelaten? <span class="faq-icon">+</span></button>
+                <div class="faq-antwoord">Nee, helaas kunnen we geen huisdieren toelaten.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-vraag">Wat zijn de annuleringsvoorwaarden? <span class="faq-icon">+</span></button>
+                <div class="faq-antwoord">U kunt uw boeking <strong>tot 30 dagen voor aankomst kosteloos annuleren</strong>. Bij annulering binnen de 30 dagen worden de reeds betaalde kosten niet teruggestort.</div>
+            </div>
+        </div>
+    </div>
+</section>
 
+<!-- ── CTA BANNER ──────────────────────────────────────── -->
+<section class="section section--tight">
+    <div class="container">
+        <div class="cta-banner reveal">
+            <h2>Klaar voor een onvergetelijke vakantie?</h2>
+            <p>Bekijk de beschikbaarheid en boek vandaag nog uw verblijf in Boszicht.</p>
+            <a href="boeken.html" class="btn btn--outline btn--large">Bekijk beschikbaarheid</a>
+        </div>
+    </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="assets/js/partials.js"></script>
+<script src="assets/js/main.js"></script>
 <script>
-    // EmailJS init
-    (function(){ emailjs.init("i0ju2FlG4VVfdFb3S"); })();
+    /* ── FAQ accordion ───────────────────────────────── */
+    document.querySelectorAll('.faq-vraag').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var isOpen = this.classList.contains('open');
+            document.querySelectorAll('.faq-vraag').forEach(function(b) {
+                b.classList.remove('open');
+                b.nextElementSibling.classList.remove('open');
+            });
+            if (!isOpen) {
+                this.classList.add('open');
+                this.nextElementSibling.classList.add('open');
+            }
+        });
+    });
 
-    // Popup
-    function showConfirmation(){
-        var el=document.getElementById('confirmation');
-        el.style.display='flex';
-        clearTimeout(window._ct);
-        window._ct=setTimeout(hideConfirmation,10000);
-    }
-    function hideConfirmation(){ document.getElementById('confirmation').style.display='none'; }
-    document.getElementById('conf-x').addEventListener('click',hideConfirmation);
-    document.getElementById('conf-btn').addEventListener('click',hideConfirmation);
-    document.getElementById('confirmation').addEventListener('click',function(e){ if(e.target===this) hideConfirmation(); });
+    /* ── Hero datumchecker met beschikbaarheidscheck ── */
+    (function () {
+        var CAL_ID  = 'boszichtdurbuy@gmail.com';
 
-    // Formulier — alles in één DOMContentLoaded (FIX: dubbele window.onload verwijderd)
-    document.addEventListener('DOMContentLoaded',function(){
-        var form=document.getElementById('contact-form');
-        var btn=document.getElementById('submit-btn');
-        form.addEventListener('submit',function(e){
-            e.preventDefault();
-            btn.disabled=true; btn.value='Verzenden\u2026';
-            emailjs.sendForm('contact_service','contact_form',form)
-                .then(function(){
-                    showConfirmation(); form.reset();
-                    btn.disabled=false; btn.value='Verstuur Aanvraag';
-                },function(err){
-                    console.error('EmailJS:',err);
-                    alert('Er is iets misgegaan. Probeer opnieuw of mail naar boszichtdurbuy@gmail.com');
-                    btn.disabled=false; btn.value='Verstuur Aanvraag';
+        var hcStart  = document.getElementById('hc_start');
+        var hcEnd    = document.getElementById('hc_end');
+        var hcBtn    = document.getElementById('hc_btn');
+        var hcResult = document.getElementById('hc_result');
+
+        if (!hcStart || !hcEnd || !hcBtn) return;
+
+        /* Min-datums instellen */
+        var today = new Date().toISOString().split('T')[0];
+        hcStart.setAttribute('min', today);
+        hcEnd.setAttribute('min', today);
+
+        hcStart.addEventListener('change', function () {
+            hcEnd.setAttribute('min', hcStart.value);
+            if (hcEnd.value && hcEnd.value < hcStart.value) hcEnd.value = hcStart.value;
+            hideResult();
+        });
+        hcEnd.addEventListener('change', hideResult);
+
+        hcBtn.addEventListener('click', function () {
+            if (!hcStart.value || !hcEnd.value) {
+                showResult('warning', '⚠', 'Selecteer eerst een aankomst- en vertrekdatum.', null, null);
+                return;
+            }
+            if (hcEnd.value <= hcStart.value) {
+                showResult('warning', '⚠', 'De vertrekdatum moet na de aankomstdatum liggen.', null, null);
+                return;
+            }
+            hcBtn.disabled = true;
+            hcBtn.textContent = 'Controleren…';
+            hideResult();
+            checkAvailability(hcStart.value, hcEnd.value)
+                .then(function (available) {
+                    if (available === true) {
+                        showResult('available', '✓',
+                            'Deze periode is beschikbaar!',
+                            'boeken.html#formulier?' + new URLSearchParams({ aankomst: hcStart.value, vertrek: hcEnd.value }).toString(),
+                            'Boek nu →');
+                    } else if (available === false) {
+                        showResult('unavailable', '✗',
+                            'Deze periode is helaas (deels) bezet.',
+                            'boeken.html',
+                            'Bekijk de agenda →');
+                    } else {
+                        showResult('warning', '📅',
+                            'Beschikbaarheid kon niet automatisch worden gecontroleerd.',
+                            'boeken.html',
+                            'Bekijk de agenda →');
+                    }
+                })
+                .catch(function () {
+                    showResult('warning', '📅',
+                        'Beschikbaarheid kon niet automatisch worden gecontroleerd.',
+                        'boeken.html',
+                        'Bekijk de agenda →');
+                })
+                .then(function () {
+                    hcBtn.disabled = false;
+                    hcBtn.textContent = 'Bekijk beschikbaarheid';
                 });
         });
-    });
 
-    // Smooth scroll
-    function scrollToSection(id){
-        var el=document.getElementById(id);
-        if(el) jQuery('html,body').animate({scrollTop:jQuery(el).offset().top-70},1000);
-    }
+        function showResult(type, icon, msg, href, linkText) {
+            hcResult.className = 'hero-result hero-result--' + type;
+            var linkHtml = href
+                ? '<a class="hero-result__link" href="' + href + '">' + linkText + '</a>'
+                : '';
+            hcResult.innerHTML =
+                '<span class="hero-result__icon">' + icon + '</span>' +
+                '<span class="hero-result__text">' + msg + '</span>' +
+                linkHtml;
+            hcResult.style.display = 'flex';
+        }
+
+        function hideResult() {
+            hcResult.style.display = 'none';
+        }
+
+        /* ICS-cache: voorkomt dubbele fetches binnen 2 minuten */
+        var _icsCache = null;
+        var _icsCacheTime = 0;
+
+        function checkAvailability(startStr, endStr) {
+            return getIcs().then(function (icsText) {
+                if (!icsText) return null;
+                return !hasOverlap(icsText, new Date(startStr), new Date(endStr));
+            });
+        }
+
+        /* Haalt ICS op (uit cache of via de snelste proxy) */
+        function getIcs() {
+            if (_icsCache && Date.now() - _icsCacheTime < 120000) {
+                return Promise.resolve(_icsCache);
+            }
+            var icsUrl = 'https://calendar.google.com/calendar/ical/' +
+                         encodeURIComponent(CAL_ID) + '/public/basic.ics';
+            var proxies = [
+                'https://api.allorigins.win/raw?url=',
+                'https://corsproxy.io/?url=',
+            ];
+            /* Beide proxies tegelijk — neem de snelste geldige respons */
+            return firstSuccess(proxies.map(function (p) {
+                return fetchIcs(p + encodeURIComponent(icsUrl));
+            })).then(function (icsText) {
+                _icsCache = icsText;
+                _icsCacheTime = Date.now();
+                return icsText;
+            }).catch(function (err) {
+                console.warn('[Boszicht] Kalender niet bereikbaar:', err.message,
+                    '— Zorg dat de Google Agenda openbaar is ingesteld.');
+                return null;
+            });
+        }
+
+        /* Fetch één proxy, timeout 5 s */
+        function fetchIcs(url) {
+            var ctrl  = new AbortController();
+            var timer = setTimeout(function () { ctrl.abort(); }, 5000);
+            return fetch(url, { signal: ctrl.signal })
+                .then(function (res) {
+                    clearTimeout(timer);
+                    if (!res.ok) throw new Error('HTTP ' + res.status);
+                    return res.text();
+                })
+                .then(function (text) {
+                    if (!text || !text.includes('BEGIN:VCALENDAR')) throw new Error('Geen ICS');
+                    return text;
+                })
+                .catch(function (err) { clearTimeout(timer); throw err; });
+        }
+
+        /* Geeft de eerste promise die resolve (negeert rejects totdat alles faalt) */
+        function firstSuccess(promises) {
+            return new Promise(function (resolve, reject) {
+                var left = promises.length;
+                if (!left) { reject(new Error('Geen proxies')); return; }
+                promises.forEach(function (p) {
+                    p.then(resolve).catch(function () {
+                        if (--left === 0) reject(new Error('Alle proxies mislukt'));
+                    });
+                });
+            });
+        }
+
+        /* Parst VEVENT-blokken en detecteert overlap met de gevraagde periode */
+        function hasOverlap(icsText, checkIn, checkOut) {
+            var blocks = icsText.split('BEGIN:VEVENT');
+            blocks.shift();
+            for (var i = 0; i < blocks.length; i++) {
+                var block = blocks[i];
+                var dsm = block.match(/DTSTART(?:;[^:\r\n]*)?:(\d{8})/);
+                var dem = block.match(/DTEND(?:;[^:\r\n]*)?:(\d{8})/);
+                if (!dsm || !dem) continue;
+                var evtStart = icsToDate(dsm[1]);
+                var evtEnd   = icsToDate(dem[1]);
+                if (evtStart < checkOut && evtEnd > checkIn) return true;
+            }
+            return false;
+        }
+
+        function icsToDate(s) {
+            return new Date(s.substr(0, 4) + '-' + s.substr(4, 2) + '-' + s.substr(6, 2));
+        }
+    }());
 </script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
-
-<script>
-    jQuery(document).ready(function($){
-        $('.accommodatie-carousel').owlCarousel({
-            loop:true,center:true,margin:10,nav:true,dots:false,
-            autoplay:true,autoplayTimeout:4000,autoplayHoverPause:true,
-            responsive:{0:{items:1,center:false},600:{items:2,center:true},1000:{items:4,center:true}}
-        });
-        $('#new-cars-carousel').owlCarousel({
-            loop:true,margin:10,nav:true,dots:false,
-            autoplay:true,autoplayTimeout:5000,autoplayHoverPause:true,
-            responsive:{0:{items:1,nav:false},600:{items:1},1000:{items:1}}
-        });
-    });
-</script>
-
-<script src="assets/js/bootsnav.js"></script>
-<!-- custom.js: $(window).load vervangen door $(window).on('load') — FIX voor jQuery 3 crash -->
-<script src="assets/js/custom.js"></script>
-
 </body>
 </html>

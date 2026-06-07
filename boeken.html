@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="nl">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Boeken & Beschikbaarheid — Boszicht Durbuy</title>
+    <meta name="description" content="Bekijk de beschikbaarheid van vakantiehuisje Boszicht in Durbuy en reserveer eenvoudig via ons boekingsformulier.">
+
+    <link rel="shortcut icon" type="image/png" href="assets/logo/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Rufina:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* ── Pagina-datumchecker ──────────────────────── */
+        .page-checker {
+            display: flex; align-items: flex-end; gap: 14px; flex-wrap: wrap;
+            background: #fff; border: 1.5px solid #d6e8dd; border-radius: 12px;
+            padding: 20px 24px; margin-bottom: 24px;
+            box-shadow: 0 2px 12px rgba(9,112,64,0.07);
+        }
+        .page-checker__field {
+            display: flex; flex-direction: column; gap: 5px;
+            flex: 1; min-width: 145px;
+        }
+        .page-checker__field label {
+            font-size: 11px; font-weight: 700; letter-spacing: 1.8px;
+            text-transform: uppercase; color: var(--green-700);
+        }
+        .page-checker__field input {
+            border: 1.5px solid #ccd9d2; border-radius: 7px;
+            padding: 10px 13px; font-family: var(--font-sans);
+            font-size: 14px; color: var(--warm-900); outline: none;
+            transition: border-color .2s, box-shadow .2s; background: #fff;
+        }
+        .page-checker__field input:focus {
+            border-color: var(--green-700);
+            box-shadow: 0 0 0 3px rgba(9,112,64,0.1);
+        }
+        .page-checker__btn { flex-shrink: 0; white-space: nowrap; }
+        .page-checker__btn:disabled { opacity: .65; cursor: wait; }
+
+        /* ── Resultaatbalk (pagina-variant) ──────────── */
+        .page-result {
+            border-radius: 10px; padding: 13px 18px;
+            display: flex; align-items: center; gap: 12px;
+            font-size: 14px; font-weight: 500; margin-bottom: 20px;
+        }
+        .page-result--available   { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
+        .page-result--unavailable { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+        .page-result--warning     { background: #fef9c3; color: #713f12; border: 1px solid #fde047; }
+        .page-result__icon  { font-size: 18px; flex-shrink: 0; }
+        .page-result__text  { flex-grow: 1; line-height: 1.4; }
+        .page-result__link  { font-weight: 700; color: inherit; text-decoration: underline; white-space: nowrap; }
+
+        /* ── Annuleringsnotice ────────────────────────── */
+        .annulering-notice {
+            display: flex; align-items: flex-start; gap: 14px;
+            background: #eff6ff; border: 1px solid #bfdbfe;
+            border-radius: 10px; padding: 16px 20px; margin-top: 22px;
+            font-size: 14px; line-height: 1.65; color: #1e40af;
+        }
+        .annulering-notice__icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+        .annulering-notice strong { color: #1e3a8a; }
+        .annulering-notice p + p  { margin-top: 4px; }
+
+        @media (max-width: 640px) {
+            .page-checker { padding: 16px 18px; gap: 10px; }
+            .page-checker__field { min-width: calc(50% - 6px); }
+            .page-checker__btn { width: 100%; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<!-- ── PAGE HERO ───────────────────────────────────────── -->
+<section class="hero hero--page">
+    <div class="hero__content">
+        <span class="hero__eyebrow">Boeken</span>
+        <h1>Reserveer uw verblijf</h1>
+        <p class="hero__tagline">Bekijk de beschikbare data en stuur uw aanvraag</p>
+    </div>
+</section>
+
+<!-- ── AGENDA ──────────────────────────────────────────── -->
+<section class="section">
+    <div class="container">
+        <div class="section-header reveal">
+            <span class="eyebrow">Stap 1</span>
+            <h2>Bekijk de beschikbaarheid</h2>
+            <p>De gemarkeerde dagen in de kalender zijn al gereserveerd. Vrije dagen kunt u aanvragen via het formulier hieronder.</p>
+        </div>
+
+        <div class="reveal">
+            <div class="page-checker">
+                <div class="page-checker__field">
+                    <label for="pc_start">Incheckdatum</label>
+                    <input type="date" id="pc_start">
+                </div>
+                <div class="page-checker__field">
+                    <label for="pc_end">Uitcheckdatum</label>
+                    <input type="date" id="pc_end">
+                </div>
+                <button class="btn btn--primary page-checker__btn" id="pc_btn">Controleer beschikbaarheid</button>
+            </div>
+            <div class="page-result" id="pc_result" style="display:none;"></div>
+
+            <iframe
+                class="agenda-iframe"
+                src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FBrussels&showPrint=0&showTitle=0&showCalendars=0&showTz=0&src=Ym9zemljaHRkdXJidXlAZ21haWwuY29t&color=%23039BE5"
+                title="Boszicht Durbuy beschikbaarheidskalender">
+            </iframe>
+        </div>
+    </div>
+</section>
+
+<!-- ── PRIJZEN ─────────────────────────────────────────── -->
+<section class="section section--alt" id="prijzen">
+    <div class="container">
+        <div class="section-header reveal">
+            <span class="eyebrow">Stap 2</span>
+            <h2>Prijzen</h2>
+        </div>
+
+        <div class="pricing reveal">
+            <div class="pricing-card">
+                <h3>Buiten Vakantieperiodes</h3>
+                <table class="pricing-table">
+                    <tr><td>Week (7 nachten)</td><td>€ 850</td></tr>
+                    <tr><td>Midweek (4 nachten)</td><td>€ 600</td></tr>
+                    <tr><td>Weekend (2 nachten)</td><td>€ 430</td></tr>
+                </table>
+            </div>
+
+            <div class="pricing-card pricing-card--featured">
+                <h3>Vakantieperiodes (BE &amp; NL)</h3>
+                <table class="pricing-table">
+                    <tr><td>Week (7 nachten)</td><td>€ 1.395</td></tr>
+                    <tr><td>Midweek (4 nachten)</td><td>€ 895</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="pricing-note reveal">
+            <strong>Inbegrepen:</strong> schoonmaak, lakensets en parkkosten.<br>
+            <strong>Niet inbegrepen:</strong> toeristenbelasting van € 2,- per persoon per nacht.
+        </div>
+    </div>
+</section>
+
+<!-- ── FORMULIER ───────────────────────────────────────── -->
+<section class="section" id="formulier">
+    <div class="container" style="max-width: 720px;">
+        <div class="section-header reveal">
+            <span class="eyebrow">Stap 3</span>
+            <h2>Verstuur uw aanvraag</h2>
+            <p>Vul uw gegevens in en geef aan welke periode u wenst te boeken. We bevestigen uw aanvraag via e-mail.</p>
+        </div>
+
+        <div class="form-card reveal">
+            <form id="booking-form" novalidate>
+                <div class="form-group">
+                    <label for="name">Naam</label>
+                    <input type="text" id="name" name="name" placeholder="Voor- en achternaam" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">E-mailadres</label>
+                        <input type="email" id="email" name="email" placeholder="uw@email.be" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Telefoon <span class="optional">(optioneel)</span></label>
+                        <input type="tel" id="phone" name="phone" placeholder="+32 ...">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="start_date">Aankomst</label>
+                        <input type="date" id="start_date" name="start_date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="end_date">Vertrek</label>
+                        <input type="date" id="end_date" name="end_date" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="guests">Aantal personen</label>
+                    <select id="guests" name="guests">
+                        <option value="1">1 persoon</option>
+                        <option value="2" selected>2 personen</option>
+                        <option value="3">3 personen</option>
+                        <option value="4">4 personen</option>
+                        <option value="5">5 personen</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Vraag of opmerking <span class="optional">(optioneel)</span></label>
+                    <textarea id="message" name="message" placeholder="Heeft u een specifieke vraag of speciale wensen?"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn--primary btn--block btn--large">
+                    Verstuur aanvraag
+                </button>
+
+                <div class="annulering-notice">
+                    <span class="annulering-notice__icon">📅</span>
+                    <div>
+                        <p><strong>Gratis annulering</strong> mogelijk tot <strong>30 dagen vóór aankomst</strong>.</p>
+                        <p>Bij annulering binnen de 30 dagen worden de reeds betaalde kosten niet teruggestort.</p>
+                    </div>
+                </div>
+
+                <p style="margin-top: 20px; font-size: 12px; color: var(--warm-500); text-align: center; line-height: 1.6;">
+                    Liever mailen? Dat kan ook —
+                    <a href="mailto:boszichtdurbuy@gmail.com" style="color: var(--green-700);">boszichtdurbuy@gmail.com</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- ── BEVESTIGINGSMODAL ───────────────────────────────── -->
+<div class="modal" id="booking-success" aria-hidden="true">
+    <div class="modal__box">
+        <button class="modal__close" data-modal-close aria-label="Sluiten">×</button>
+        <div class="modal__icon">✓</div>
+        <h3>Aanvraag verzonden!</h3>
+        <p>Bedankt voor uw aanvraag. We bekijken uw bericht en nemen zo snel mogelijk contact met u op via e-mail.</p>
+        <button class="btn btn--primary" data-modal-close>Sluiten</button>
+    </div>
+</div>
+
+<div id="site-footer"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+    (function() { emailjs.init("i0ju2FlG4VVfdFb3S"); })();
+</script>
+<script>
+    /* ── Boekingsformulier datums ────────────────────── */
+    document.addEventListener("DOMContentLoaded", function() {
+        var start  = document.getElementById("start_date");
+        var end    = document.getElementById("end_date");
+        var guests = document.getElementById("guests");
+        if (start && end) {
+            var today = new Date().toISOString().split("T")[0];
+            start.setAttribute("min", today);
+            end.setAttribute("min", today);
+            start.addEventListener("change", function() {
+                end.setAttribute("min", start.value);
+                if (end.value && end.value < start.value) end.value = start.value;
+            });
+        }
+
+        /* Vul datums/personen voor uit de datumchecker op de homepage */
+        var hash = window.location.hash;
+        if (hash && hash.indexOf('?') !== -1) {
+            var qs = hash.split('?')[1];
+            var params = new URLSearchParams(qs);
+            if (start  && params.get('aankomst')) start.value  = params.get('aankomst');
+            if (end    && params.get('vertrek'))  end.value    = params.get('vertrek');
+            if (guests && params.get('personen')) guests.value = params.get('personen');
+            var formulier = document.getElementById('formulier');
+            if (!formulier) formulier = document.querySelector('.form-card');
+            if (formulier) formulier.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    });
+
+    /* ── Pagina-datumchecker ─────────────────────────── */
+    (function () {
+        var CAL_ID = 'boszichtdurbuy@gmail.com';
+        var pcStart  = document.getElementById('pc_start');
+        var pcEnd    = document.getElementById('pc_end');
+        var pcBtn    = document.getElementById('pc_btn');
+        var pcResult = document.getElementById('pc_result');
+        if (!pcStart || !pcEnd || !pcBtn) return;
+
+        var today = new Date().toISOString().split('T')[0];
+        pcStart.setAttribute('min', today);
+        pcEnd.setAttribute('min', today);
+        pcStart.addEventListener('change', function () {
+            pcEnd.setAttribute('min', pcStart.value);
+            if (pcEnd.value && pcEnd.value < pcStart.value) pcEnd.value = pcStart.value;
+            pcResult.style.display = 'none';
+        });
+        pcEnd.addEventListener('change', function () { pcResult.style.display = 'none'; });
+
+        pcBtn.addEventListener('click', function () {
+            if (!pcStart.value || !pcEnd.value) {
+                showR('warning', '⚠', 'Selecteer een aankomst- en vertrekdatum.', null, null); return;
+            }
+            if (pcEnd.value <= pcStart.value) {
+                showR('warning', '⚠', 'Vertrekdatum moet na aankomstdatum liggen.', null, null); return;
+            }
+            pcBtn.disabled = true;
+            pcBtn.textContent = 'Controleren…';
+            pcResult.style.display = 'none';
+            checkAvail(pcStart.value, pcEnd.value)
+                .then(function (ok) {
+                    if (ok === true) {
+                        showR('available', '✓', 'Deze periode is beschikbaar!',
+                            '#formulier',
+                            'Vul het formulier in ↓');
+                        /* Kopieer datums ook naar het boekformulier */
+                        var s = document.getElementById('start_date');
+                        var e = document.getElementById('end_date');
+                        if (s) s.value = pcStart.value;
+                        if (e) e.value = pcEnd.value;
+                    } else if (ok === false) {
+                        showR('unavailable', '✗', 'Deze periode is helaas (deels) bezet. Kies andere data via de kalender hieronder.', null, null);
+                    } else {
+                        showR('warning', '📅', 'Beschikbaarheid kon niet automatisch worden gecontroleerd — bekijk de kalender.', null, null);
+                    }
+                })
+                .catch(function () {
+                    showR('warning', '📅', 'Beschikbaarheid kon niet automatisch worden gecontroleerd — bekijk de kalender.', null, null);
+                })
+                .then(function () {
+                    pcBtn.disabled = false;
+                    pcBtn.textContent = 'Controleer beschikbaarheid';
+                });
+        });
+
+        function showR(type, icon, msg, href, linkText) {
+            pcResult.className = 'page-result page-result--' + type;
+            var lnk = href ? ' <a class="page-result__link" href="' + href + '">' + linkText + '</a>' : '';
+            pcResult.innerHTML = '<span class="page-result__icon">' + icon + '</span><span class="page-result__text">' + msg + lnk + '</span>';
+            pcResult.style.display = 'flex';
+        }
+
+        /* ── ICS-checker (gedeelde cache met homepage) ── */
+        var _cache = null, _cacheT = 0;
+        function checkAvail(s, e) {
+            return getIcs().then(function (ics) {
+                if (!ics) return null;
+                return !hasOverlap(ics, new Date(s), new Date(e));
+            });
+        }
+        function getIcs() {
+            if (_cache && Date.now() - _cacheT < 120000) return Promise.resolve(_cache);
+            var url = 'https://calendar.google.com/calendar/ical/' + encodeURIComponent(CAL_ID) + '/public/basic.ics';
+            var proxies = ['https://api.allorigins.win/raw?url=', 'https://corsproxy.io/?url='];
+            return firstOk(proxies.map(function (p) { return fetchIcs(p + encodeURIComponent(url)); }))
+                .then(function (t) { _cache = t; _cacheT = Date.now(); return t; })
+                .catch(function () { return null; });
+        }
+        function fetchIcs(url) {
+            var ctrl = new AbortController();
+            var tmr  = setTimeout(function () { ctrl.abort(); }, 5000);
+            return fetch(url, { signal: ctrl.signal })
+                .then(function (r) { clearTimeout(tmr); if (!r.ok) throw 0; return r.text(); })
+                .then(function (t) { if (!t.includes('BEGIN:VCALENDAR')) throw 0; return t; })
+                .catch(function (e) { clearTimeout(tmr); throw e; });
+        }
+        function firstOk(ps) {
+            return new Promise(function (res, rej) {
+                var left = ps.length;
+                ps.forEach(function (p) { p.then(res).catch(function () { if (!--left) rej(); }); });
+            });
+        }
+        function hasOverlap(ics, ci, co) {
+            return ics.split('BEGIN:VEVENT').slice(1).some(function (b) {
+                var ds = b.match(/DTSTART(?:;[^:\r\n]*)?:(\d{8})/);
+                var de = b.match(/DTEND(?:;[^:\r\n]*)?:(\d{8})/);
+                if (!ds || !de) return false;
+                return toD(ds[1]) < co && toD(de[1]) > ci;
+            });
+        }
+        function toD(s) { return new Date(s.substr(0,4)+'-'+s.substr(4,2)+'-'+s.substr(6,2)); }
+    }());
+</script>
+<script src="assets/js/partials.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
