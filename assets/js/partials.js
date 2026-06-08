@@ -16,7 +16,6 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="accommodatie.html">Accommodatie</a></li>
                 <li><a href="omgeving.html">Omgeving</a></li>
-                <li><a href="boeken.html">Boeken</a></li>
                 <li><a href="contact.html">Contact</a></li>
                 <li><a href="boeken.html" class="nav-cta" style="padding:10px 22px;width:auto;white-space:nowrap;">Reserveer</a></li>
             </ul>
@@ -50,7 +49,8 @@
                 <ul>
                     <li><a href="mailto:boszichtdurbuy@gmail.com">✉ boszichtdurbuy@gmail.com</a></li>
                     <li><a href="tel:+32468002549">☏ +32 468 00 25 49</a></li>
-                    <li><a href="https://maps.app.goo.gl/YLTZ14EaJ1cJwLXC7" target="_blank" rel="noopener">📍 Sunclass Park, Durbuy</a></li>
+                    <li><a href="https://wa.me/32468002549" target="_blank" rel="noopener">💬 WhatsApp</a></li>
+                    <li>📍 Sunclass Park, Durbuy</li>
                 </ul>
             </div>
             <div class="footer-col">

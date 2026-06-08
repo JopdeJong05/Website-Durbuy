@@ -362,6 +362,15 @@ h1, h2, h3, h4, h5, h6 {
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 28px;
 }
+.card-grid--4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+@media (max-width: 900px) {
+    .card-grid--4 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 500px) {
+    .card-grid--4 { grid-template-columns: 1fr; }
+}
 .feature-card {
     background: var(--white);
     padding: 36px 26px;
