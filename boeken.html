@@ -61,10 +61,8 @@
             border-color: var(--green-700);
             box-shadow: 0 0 0 3px rgba(9,112,64,0.1);
         }
-        .page-checker__field input::placeholder {
-            color: rgba(44, 62, 80, 0.45);
-            opacity: 1;
-        }
+        .page-checker__field input::-webkit-input-placeholder { color: rgba(44,62,80,0.45); opacity: 1; }
+        .page-checker__field input::placeholder { color: rgba(44,62,80,0.45); opacity: 1; }
         .page-checker__btn { flex-shrink: 0; white-space: nowrap; }
         .page-checker__btn:disabled { opacity: .65; cursor: wait; }
 
@@ -305,13 +303,13 @@
         /* flatpickr datumkiezer (dd/mm/jjjj weergave) */
         var fpPcEnd = flatpickr(pcEnd, {
             dateFormat: 'Y-m-d', altInput: true, altFormat: 'd/m/Y',
-            minDate: 'today', locale: 'nl',
+            minDate: 'today', locale: 'nl', disableMobile: true,
             onReady: function (sel, dateStr, fp) { fp.altInput.placeholder = 'dd/mm/jjjj'; },
             onChange: function () { pcResult.style.display = 'none'; }
         });
         var fpPcStart = flatpickr(pcStart, {
             dateFormat: 'Y-m-d', altInput: true, altFormat: 'd/m/Y',
-            minDate: 'today', locale: 'nl',
+            minDate: 'today', locale: 'nl', disableMobile: true,
             onReady: function (sel, dateStr, fp) { fp.altInput.placeholder = 'dd/mm/jjjj'; },
             onChange: function (sel, dateStr) {
                 fpPcEnd.set('minDate', dateStr);

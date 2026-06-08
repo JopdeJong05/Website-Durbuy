@@ -660,11 +660,10 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 0 0 0 3px rgba(9, 112, 64, 0.1);
 }
 .form-group textarea { resize: vertical; min-height: 110px; }
+.form-group input::-webkit-input-placeholder,
+.form-group textarea::-webkit-input-placeholder { color: rgba(44,62,80,0.45); opacity: 1; }
 .form-group input::placeholder,
-.form-group textarea::placeholder {
-    color: rgba(44, 62, 80, 0.45);
-    opacity: 1;
-}
+.form-group textarea::placeholder { color: rgba(44,62,80,0.45); opacity: 1; }
 .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
