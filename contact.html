@@ -58,9 +58,20 @@
             font-family: var(--font-sans); font-size: 14px; font-weight: 700; color: var(--warm-500);
             text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px;
         }
-        .contact-card a { color: var(--warm-900); font-size: 17px; font-weight: 600; transition: color var(--t); }
-        .contact-card a:hover { color: var(--green-700); }
-        .contact-card p { font-size: 14px; color: var(--warm-500); margin-top: 6px; }
+        .contact-card__value { font-size: 16px; font-weight: 600; color: var(--warm-700); margin-bottom: 16px; display: block; }
+        .contact-card p { font-size: 13px; color: var(--warm-500); margin-top: 0; margin-bottom: 16px; }
+        .contact-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 11px 22px; border-radius: 50px;
+            font-size: 14px; font-weight: 600; font-family: 'Poppins', sans-serif;
+            text-decoration: none; transition: all 0.2s ease;
+            border: 2px solid var(--green-700); color: var(--green-700);
+            background: transparent;
+        }
+        .contact-btn:hover { background: var(--green-700); color: #fff; transform: translateY(-1px); }
+        .contact-btn--filled { background: var(--green-700); color: #fff; }
+        .contact-btn--filled:hover { background: var(--green-800, #065f3a); border-color: var(--green-800, #065f3a); color: #fff; }
+        .contact-card--location .contact-card__value { margin-bottom: 6px; }
 
         @media (max-width: 767px) { #faq { padding: 50px 0; } }
     </style>
@@ -90,8 +101,9 @@
             <div class="contact-card">
                 <div class="contact-card__icon">✉</div>
                 <h4>E-mail</h4>
-                <a href="mailto:boszichtdurbuy@gmail.com">boszichtdurbuy@gmail.com</a>
+                <span class="contact-card__value">boszichtdurbuy@gmail.com</span>
                 <p>Voorkeur bij niet dringende vragen</p>
+                <a href="mailto:boszichtdurbuy@gmail.com" class="contact-btn contact-btn--filled">✉ Stuur e-mail</a>
             </div>
             <div class="contact-card">
                 <div class="contact-card__icon">
@@ -100,19 +112,21 @@
                     </svg>
                 </div>
                 <h4>WhatsApp</h4>
-                <a href="https://wa.me/32468002549" target="_blank" rel="noopener">+32 468 00 25 49</a>
+                <span class="contact-card__value">+32 468 00 25 49</span>
                 <p>Snel antwoord via WhatsApp</p>
+                <a href="https://wa.me/32468002549" target="_blank" rel="noopener" class="contact-btn contact-btn--filled">&#x1F4AC; Open WhatsApp</a>
             </div>
             <div class="contact-card">
                 <div class="contact-card__icon">☏</div>
                 <h4>Telefoon</h4>
-                <a href="tel:+32468002549">+32 468 00 25 49</a>
+                <span class="contact-card__value">+32 468 00 25 49</span>
                 <p>Bereikbaar van 9:00 tot 21:00</p>
+                <a href="tel:+32468002549" class="contact-btn">☏ Bel ons</a>
             </div>
-            <div class="contact-card">
+            <div class="contact-card contact-card--location">
                 <div class="contact-card__icon">📍</div>
                 <h4>Locatie</h4>
-                Sunclass Park, Durbuy
+                <span class="contact-card__value">Sunclass Park, Durbuy</span>
                 <p>Rue d'Andenne 20/193, 6940 Durbuy</p>
             </div>
         </div>
