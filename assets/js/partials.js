@@ -48,8 +48,8 @@
                 <h4>Contact</h4>
                 <ul>
                     <li><a href="mailto:boszichtdurbuy@gmail.com">✉ boszichtdurbuy@gmail.com</a></li>
-                    <li><a href="tel:+32468002549">☏ +32 468 00 25 49</a></li>
                     <li><a href="https://wa.me/32468002549" target="_blank" rel="noopener">💬 WhatsApp</a></li>
+                    <li><a href="tel:+32468002549">☏ +32 468 00 25 49</a></li>
                     <li>📍 Sunclass Park, Durbuy</li>
                 </ul>
             </div>

@@ -166,6 +166,64 @@
             .hero-checker__field { min-width: 100%; }
             .hero-checker__btn { width: 100%; text-align: center; }
         }
+
+        /* ── Accommodatie carousel ───────────────────────── */
+        .accom-carousel {
+            position: relative;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            height: 460px;
+        }
+        .accom-carousel .carousel-slide {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0;
+            box-shadow: none;
+            opacity: 0;
+            transition: opacity 0.7s ease;
+        }
+        .accom-carousel .carousel-slide.active { opacity: 1; }
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.38);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 40px; height: 40px;
+            font-size: 22px;
+            cursor: pointer;
+            z-index: 2;
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.2s;
+        }
+        .carousel-btn:hover { background: rgba(0,0,0,0.65); }
+        .carousel-btn--prev { left: 12px; }
+        .carousel-btn--next { right: 12px; }
+        .carousel-dots {
+            position: absolute;
+            bottom: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 7px;
+            z-index: 2;
+        }
+        .carousel-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            border: none; padding: 0; display: block;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .carousel-dot.active { background: #fff; transform: scale(1.25); }
+        @media (max-width: 767px) { .accom-carousel { height: 320px; } }
     </style>
 </head>
 <body>
@@ -236,8 +294,25 @@
 <section class="section section--alt">
     <div class="container">
         <div class="split reveal">
-            <div class="split__media">
-                <img src="assets/images/selectie/buiten 2.jpg" alt="Het chalet van buiten" loading="lazy">
+            <div class="split__media accom-carousel">
+                <img src="assets/images/selectie/Vooraanzicht.jpg"    class="carousel-slide active" alt="Het chalet van buiten" loading="lazy">
+                <img src="assets/images/selectie/buiten 2.jpg"        class="carousel-slide" alt="Gevel en tuin" loading="lazy">
+                <img src="assets/images/selectie/buiten avond.jpeg"   class="carousel-slide" alt="Sfeervolle avondfoto" loading="lazy">
+                <img src="assets/images/selectie/woonkamer.jpg"       class="carousel-slide" alt="Woonkamer" loading="lazy">
+                <img src="assets/images/selectie/keuken.jpg"          class="carousel-slide" alt="Keuken" loading="lazy">
+                <img src="assets/images/selectie/terras (1).jpg"      class="carousel-slide" alt="Terras" loading="lazy">
+                <img src="assets/images/selectie/slaapkamer 1.jpg"    class="carousel-slide" alt="Slaapkamer" loading="lazy">
+                <button class="carousel-btn carousel-btn--prev" aria-label="Vorige">&#8249;</button>
+                <button class="carousel-btn carousel-btn--next" aria-label="Volgende">&#8250;</button>
+                <div class="carousel-dots">
+                    <span class="carousel-dot active" data-idx="0"></span>
+                    <span class="carousel-dot" data-idx="1"></span>
+                    <span class="carousel-dot" data-idx="2"></span>
+                    <span class="carousel-dot" data-idx="3"></span>
+                    <span class="carousel-dot" data-idx="4"></span>
+                    <span class="carousel-dot" data-idx="5"></span>
+                    <span class="carousel-dot" data-idx="6"></span>
+                </div>
             </div>
             <div class="split__content">
                 <span class="eyebrow" style="color:var(--green-700);font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;display:inline-block;margin-bottom:14px;">De Accommodatie</span>
@@ -497,6 +572,36 @@
                     return data.items.length === 0;
                 });
         }
+    }());
+
+    /* ── Accommodatie carousel ───────────────────────────── */
+    (function () {
+        var carousel = document.querySelector('.accom-carousel');
+        if (!carousel) return;
+        var slides  = carousel.querySelectorAll('.carousel-slide');
+        var dots    = carousel.querySelectorAll('.carousel-dot');
+        var current = 0;
+        var timer;
+
+        function goTo(idx) {
+            slides[current].classList.remove('active');
+            dots[current].classList.remove('active');
+            current = (idx + slides.length) % slides.length;
+            slides[current].classList.add('active');
+            dots[current].classList.add('active');
+        }
+
+        function start() { timer = setInterval(function () { goTo(current + 1); }, 4000); }
+        function stop()  { clearInterval(timer); }
+        function reset() { stop(); start(); }
+
+        carousel.querySelector('.carousel-btn--prev').addEventListener('click', function () { goTo(current - 1); reset(); });
+        carousel.querySelector('.carousel-btn--next').addEventListener('click', function () { goTo(current + 1); reset(); });
+        dots.forEach(function (dot, i) { dot.addEventListener('click', function () { goTo(i); reset(); }); });
+        carousel.addEventListener('mouseenter', stop);
+        carousel.addEventListener('mouseleave', start);
+
+        start();
     }());
 </script>
 </body>
