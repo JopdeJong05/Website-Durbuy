@@ -64,6 +64,7 @@
         </div>
         <div class="footer-bottom">
             <p>&copy; <span id="current-year">2026</span> Boszicht Durbuy — Alle rechten voorbehouden</p>
+            <p style="font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 4px;">Erkenningsnummer Waals Gewest: <strong>BELWAL001/001/0001363</strong></p>
         </div>
     </div>
 </footer>

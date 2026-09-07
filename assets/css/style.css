@@ -269,7 +269,7 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: center;
     background:
         linear-gradient(to bottom, rgba(0,0,0,0.60) 0%, rgba(0,0,0,0.55) 50%, rgba(0,0,0,0.70) 100%),
-        url('../images/hero/banner.jpg') center/cover no-repeat;
+        url('../images/selectie/Vooraanzicht.png') center/cover no-repeat;
     background-attachment: fixed;
     color: var(--white);
     text-align: center;
@@ -851,7 +851,7 @@ h1, h2, h3, h4, h5, h6 {
 .cta-banner {
     background:
         linear-gradient(135deg, rgba(26, 52, 36, 0.92), rgba(9, 112, 64, 0.88)),
-        url('../images/hero/banner.jpg') center/cover;
+        url('../images/selectie/Vooraanzicht.png') center/cover;
     color: var(--white);
     padding: 80px 24px;
     text-align: center;

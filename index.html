@@ -13,6 +13,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
     <style>
+        .flatpickr-calendar,
+        .flatpickr-calendar *,
+        .flatpickr-calendar *::before,
+        .flatpickr-calendar *::after {
+        box-sizing: border-box;
+}
         /* ── Flatpickr kalender: clean groen thema ── */
         .flatpickr-calendar { border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.15); border: none; font-family: var(--font-sans,'Poppins',sans-serif); overflow: hidden; }
         .flatpickr-months { background: #097040; }
@@ -29,7 +35,7 @@
         .numInputWrapper span.arrowDown::after { border-top-color: rgba(255,255,255,0.8); }
         .flatpickr-weekdays { background: #0b8049; padding: 4px 0; }
         span.flatpickr-weekday { background: transparent; color: rgba(255,255,255,0.85); font-size: 11px; font-weight: 700; letter-spacing: 0.4px; }
-        .flatpickr-day { border-radius: 8px; font-size: 13px; color: #2c3e50; max-width: 36px; height: 36px; line-height: 36px; border: 1px solid transparent; }
+        .flatpickr-day { border-radius: 8px; font-size: 13px; color: #2c3e50; max-width: 39px; height: 36px; line-height: 36px; border: 1px solid transparent; }
         .flatpickr-day:hover, .flatpickr-day.prevMonthDay:hover, .flatpickr-day.nextMonthDay:hover { background: #e8f4ee; border-color: #e8f4ee; color: #097040; }
         .flatpickr-day.today { border-color: #097040; font-weight: 700; }
         .flatpickr-day.today:hover { background: #097040; color: #fff; border-color: #097040; }
@@ -295,7 +301,7 @@
     <div class="container">
         <div class="split reveal">
             <div class="split__media accom-carousel">
-                <img src="assets/images/selectie/Vooraanzicht.jpg"    class="carousel-slide active" alt="Het chalet van buiten" loading="lazy">
+                <img src="assets/images/selectie/Vooraanzicht.png"    class="carousel-slide active" alt="Het chalet van buiten" loading="lazy">
                 <img src="assets/images/selectie/buiten 2.jpg"        class="carousel-slide" alt="Gevel en tuin" loading="lazy">
                 <img src="assets/images/selectie/buiten avond.jpeg"   class="carousel-slide" alt="Sfeervolle avondfoto" loading="lazy">
                 <img src="assets/images/selectie/woonkamer.jpg"       class="carousel-slide" alt="Woonkamer" loading="lazy">
